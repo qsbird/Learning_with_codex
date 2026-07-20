@@ -1,0 +1,17 @@
+.omx/
+
+# Operating-system and IDE state
+.DS_Store
+.idea/
+.vscode/
+
+# CMake build trees and generated files
+build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+build.ninja
+.ninja_deps
+.ninja_log

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learning Coach"
+  short_description: "Plan practice, test understanding, and adapt."
+  default_prompt: "Use $learning-coach to create my next CMake learning session."
