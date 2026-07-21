@@ -312,3 +312,14 @@
 - 证据：`AGENTS.md` 的 End-of-session GitHub sync 规则，以及 `learning-coach` 的同步步骤。
 - 约束：不提交构建产物、IDE 本地状态、`.DS_Store` 或 `.omx/` 状态；无变更时不创建空提交。
 - 下一步：继续 P2.5 的 `HELLO_BUILD_APP` 练习。
+
+### 2026-07-21 — P2.5: 应用构建开关练习完成
+
+- 目标：用 `option()` 和 `if()` 让构建者控制是否创建 `hello` 应用 target。
+- 本课讲解：布尔 cache 选项由 `-D` 覆盖；条件成立时才处理 `app/` 子目录；独立构建目录保留各自的 cache 值。
+- 我的问题与答案：学习者的终端未识别 `rg`；已说明其为 ripgrep，并用系统自带 `grep` 完成等价 cache 检查。
+- 我做了什么：检查根 CMake 配置，并分别配置、构建、运行 ON/OFF 两个构建树。
+- 证据：`HELLO_BUILD_APP:BOOL=ON` 的构建树生成 `app/hello` 并输出 `Hello World from program input`；`HELLO_BUILD_APP:BOOL=OFF` 的构建树仅生成 `src/libgreeting.a`，不存在 `app/hello`。
+- 我能解释：`option()` 将用户选择持久化在各自的构建目录 cache 中，`if()` 决定目标是否进入构建图。
+- 卡点或误解：无。
+- 下一步：学习 `include()`，将可复用 CMake 配置移动到独立 `.cmake` 模块。
