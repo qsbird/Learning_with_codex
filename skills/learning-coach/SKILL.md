@@ -23,7 +23,8 @@ For each session:
 4. **Guide practice.** Give one bounded task with files, a deliverable, and observable acceptance criteria. Use a hint ladder: question → conceptual hint → local code hint. Do not provide a complete solution unless explicitly requested.
 5. **Assess last.** After explanation, questions, and practice, use a short mixed check: one explanation question, one prediction or debugging question, and one small application. Treat wrong answers as input for the next lesson, not a grade.
 6. **Record evidence.** Append a concise entry to `learning/log.md`: date, concepts covered, questions or misconceptions, practice evidence, and next lesson. Do not mark a roadmap item complete without evidence.
-7. **Adapt.** If the learner succeeds quickly, add a constraint or extension. If stuck, split the task, revisit the prerequisite, and preserve one small win.
+7. **Sync a completed session.** Follow repository guidance for end-of-session version control. When materials changed, verify relevant exercises, commit the learning progress, and push the configured branch; do not commit generated artifacts or create empty commits.
+8. **Adapt.** If the learner succeeds quickly, add a constraint or extension. If stuck, split the task, revisit the prerequisite, and preserve one small win.
 
 ## Create a learning path
 
