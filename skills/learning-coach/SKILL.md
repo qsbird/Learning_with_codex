@@ -13,6 +13,12 @@ Run a short diagnostic, then maintain a small, evidence-based learning loop. Act
 2. Read `learning/profile.md`, `learning/roadmap.md`, and `learning/log.md` when they exist.
 3. If the learner's goal, prior knowledge, or available time is unknown, ask only the question that most affects the next exercise. Otherwise state the assumption and continue.
 
+## Environment ownership
+
+The coach owns the non-learning prerequisites needed to make a lesson runnable. Diagnose and repair the available toolchain before treating an exercise as blocked: locate or install the language compiler, build generator, package tools, and a suitable developer-shell activation; then use an isolated build directory for verification. Prefer activating an already-installed toolchain and project-local or session-local configuration over changing the learner's global preferences.
+
+Keep learner-owned decisions with the learner: project requirements, feature options, architecture, exercise implementation, and choices whose trade-offs are part of the lesson. Ask before an action that needs a license, payment, account access, a destructive system change, or a meaningful preference between toolchains. State the exact environment command used in the evidence when it materially affects reproducibility.
+
 ## Coaching loop
 
 For each session:
