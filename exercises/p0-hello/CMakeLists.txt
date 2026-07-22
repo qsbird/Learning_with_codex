@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(hello LANGUAGES CXX)
-option(HELLO_BUILD_APP
-        "Build the hello application"
-        ON
-)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+include(HelloOptions)
 add_subdirectory(src)
 if(HELLO_BUILD_APP)
     add_subdirectory(app)

@@ -323,3 +323,14 @@
 - 我能解释：`option()` 将用户选择持久化在各自的构建目录 cache 中，`if()` 决定目标是否进入构建图。
 - 卡点或误解：无。
 - 下一步：学习 `include()`，将可复用 CMake 配置移动到独立 `.cmake` 模块。
+
+### 2026-07-22 — P2.6: `include()` 与选项模块
+
+- 目标：将应用构建开关提取为可复用模块，并理解模块查找与变量可见性。
+- 本课讲解：`include()` 可按明确路径加载文件，或按模块名依次搜索 `CMAKE_MODULE_PATH` 和 CMake 内置模块目录；它在调用者的普通变量作用域中执行，不等同于 `add_subdirectory()`。
+- 我的问答与答案：学习者正确定位了 `include(cmake)` 误载内置 `CMake.cmake` 的原因；已纠正“未加引号参数是变量”的表述，它实际是模块名字符串。也已区分 `option()` 的默认值、已有 cache 值和 `-D` 显式覆盖。
+- 我做了什么：创建 `cmake/HelloOptions.cmake` 存放 `HELLO_BUILD_APP` 选项；在顶层追加项目模块目录并以 `include(HelloOptions)` 加载。
+- 证据：在已激活的 MSVC 开发环境中，使用 Ninja 分别执行 `cmake -S exercises/p0-hello -B <temp>/on -G Ninja && cmake --build <temp>/on`，运行 `<temp>/on/app/hello.exe` 成功；再执行 `cmake -S exercises/p0-hello -B <temp>/off -G Ninja -DHELLO_BUILD_APP=OFF && cmake --build <temp>/off` 成功。两份 cache 分别为 `HELLO_BUILD_APP:BOOL=ON` 与 `OFF`，OFF 构建未生成 `app/hello.exe`。
+- 我能解释：项目模块目录应通过 `CMAKE_MODULE_PATH` 显式加入搜索路径；`option()` 只提供 cache 不存在时的默认值，使用者的 `-D` 选择会被保留。
+- 卡点或误解：`include(cmake)` 在 Windows 上会因大小写不敏感而意外加载 CMake 内置 `CMake.cmake`，因此“未报错”不代表加载了预期模块。
+- 下一步：学习 `CMakePresets.json`，将默认与关闭应用的构建入口命名为可复现的 preset。
