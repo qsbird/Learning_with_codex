@@ -1,0 +1,28 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "default",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../../../../out/cmake/p0-hello/default"
+    },
+    {
+      "name": "no-app",
+      "inherits": "default",
+      "binaryDir": "${sourceDir}/../../../../out/cmake/p0-hello/no-app",
+      "cacheVariables": {
+        "HELLO_BUILD_APP": "OFF"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default"
+    },
+    {
+      "name": "no-app",
+      "configurePreset": "no-app"
+    }
+  ]
+}

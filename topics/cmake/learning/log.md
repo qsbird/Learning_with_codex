@@ -334,3 +334,13 @@
 - 我能解释：项目模块目录应通过 `CMAKE_MODULE_PATH` 显式加入搜索路径；`option()` 只提供 cache 不存在时的默认值，使用者的 `-D` 选择会被保留。
 - 卡点或误解：`include(cmake)` 在 Windows 上会因大小写不敏感而意外加载 CMake 内置 `CMake.cmake`，因此“未报错”不代表加载了预期模块。
 - 下一步：学习 `CMakePresets.json`，将默认与关闭应用的构建入口命名为可复现的 preset。
+
+### 2026-07-23 — P2.7: CMakePresets.json
+
+- 目标：为默认构建和关闭应用的构建创建可复现、具名的配置与构建入口。
+- 本课要点：配置 preset 保存生成器、构建目录和 cache 变量；构建 preset 通过 `configurePreset` 关联一份配置。不同配置必须使用独立的 `binaryDir`，避免 cache 和生成的构建图互相污染。
+- 我做了什么：创建 `CMakePresets.json`，定义 `default` 和继承它的 `no-app` 配置 preset；分别定义同名 build preset。将 Ninja 目录加入用户级 `PATH`，并在临时加载 MSVC 开发环境后完成验证。
+- 证据：`cmake --preset default`、`cmake --build --preset default` 成功，运行 `out/cmake/p0-hello/default/app/hello.exe` 输出 `Hello World from program input`；`cmake --preset no-app`、`cmake --build --preset no-app` 成功，且 `out/cmake/p0-hello/no-app/app/hello.exe` 不存在。
+- 我能解释：`no-app` 设置 `HELLO_BUILD_APP=OFF`，使顶层 `if(HELLO_BUILD_APP)` 跳过 `app/`；两份 preset 不能共用构建目录，因为它们的 CMake 配置与构建产物不同。
+- 卡点或误解：当前普通 PowerShell 不会自动加载 MSVC 的 `cl`；需要使用 Visual Studio Developer PowerShell，或在当前会话加载开发环境后构建。
+- 下一步：学习 preset 的继承、隐藏 preset 与条件，并为 Debug/Release 等不同构建入口建模。
