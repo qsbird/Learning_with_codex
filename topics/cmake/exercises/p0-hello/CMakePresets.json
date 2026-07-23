@@ -2,8 +2,13 @@
   "version": 3,
   "configurePresets": [
     {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja"
+    },
+    {
       "name": "default",
-      "generator": "Ninja",
+      "inherits": "base",
       "binaryDir": "${sourceDir}/../../../../out/cmake/p0-hello/default"
     },
     {

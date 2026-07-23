@@ -344,3 +344,13 @@
 - 我能解释：`no-app` 设置 `HELLO_BUILD_APP=OFF`，使顶层 `if(HELLO_BUILD_APP)` 跳过 `app/`；两份 preset 不能共用构建目录，因为它们的 CMake 配置与构建产物不同。
 - 卡点或误解：当前普通 PowerShell 不会自动加载 MSVC 的 `cl`；需要使用 Visual Studio Developer PowerShell，或在当前会话加载开发环境后构建。
 - 下一步：学习 preset 的继承、隐藏 preset 与条件，并为 Debug/Release 等不同构建入口建模。
+
+### 2026-07-23 — P2.8: 隐藏的基础 preset
+
+- 目标：用隐藏 preset 提取公共配置，并通过继承链表达配置之间的共性与差异。
+- 本课要点：`hidden: true` 的 preset 不能直接调用，也不会出现在 `cmake --list-presets` 中；它可不提供 `binaryDir`。可调用的 preset 必须通过自身或继承链获得有效的构建目录。
+- 我做了什么：新增隐藏的 `base` preset，承载 `Ninja` generator；让 `default` 继承 `base`，让 `no-app` 继承 `default` 并仅覆盖专属构建目录与 `HELLO_BUILD_APP`。
+- 证据：`cmake --list-presets` 仅显示 `default` 与 `no-app`；两份 preset 均成功重新配置与构建，Ninja 报告无额外工作。
+- 我能解释：`base` 只是复用配置的模板，不能被直接配置，因此不需要 `binaryDir`；`default` 和 `no-app` 可直接作为 CMake 入口，必须各自拥有隔离的构建树。
+- 卡点或误解：无。
+- 下一步：学习 CMake 的条件 preset 与 `condition`，让不适用当前环境的配置入口自动隐藏。
