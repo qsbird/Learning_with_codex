@@ -42,7 +42,14 @@
       "binaryDir": "${sourceDir}/../../../../out/cmake/p0-hello/release",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
-      }    }
+      }
+    },
+    {
+      "name": "vs-multi",
+      "generator": "Visual Studio 18 2026",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/../../../../out/cmake/p0-hello/vs-multi"
+    }
   ],
   "buildPresets": [
     {
@@ -64,6 +71,16 @@
     {
       "name": "release",
       "configurePreset": "release"
+    },
+    {
+      "name": "vs-debug",
+      "configurePreset": "vs-multi",
+      "configuration": "Debug"
+    },
+    {
+      "name": "vs-release",
+      "configurePreset": "vs-multi",
+      "configuration": "Release"
     }
   ]
 }

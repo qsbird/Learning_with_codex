@@ -374,3 +374,13 @@
 - 我能解释：`CMAKE_BUILD_TYPE` 作为 configure preset 的 cache variable 传入，等价于配置时的 `-DCMAKE_BUILD_TYPE=...`；build preset 只构建已经生成的构建树，不能改变其配置。
 - 卡点或误解：无。
 - 下一步：对比 Ninja 的单配置行为与 Visual Studio 等多配置生成器，并理解 `--config` 的适用场景。
+
+### 2026-07-23 — P2.11: Visual Studio 多配置 preset
+
+- 目标：用一棵 Visual Studio 构建树分别构建 Debug 与 Release，并与 Ninja 单配置行为对比。
+- 本课要点：多配置生成器在同一构建树中为不同 configuration 生成独立规则与输出目录；build preset 的 `configuration` 等价于构建时的 `--config`。Ninja 默认只生成一套由 configure cache 固定的规则。
+- 我做了什么：新增独立的 `vs-multi` configure preset，使用 `Visual Studio 18 2026` 与 `x64`；新增 `vs-debug`、`vs-release` build preset，分别设为 `Debug`、`Release`。未让其继承 Ninja preset，避免生成器冲突。
+- 证据：`cmake --preset vs-multi`、`cmake --build --preset vs-debug`、`cmake --build --preset vs-release` 成功；同一构建树同时生成并运行 `app/Debug/hello.exe` 与 `app/Release/hello.exe`，均输出 `Hello World from program input`。
+- 我能解释：Visual Studio 为每个 configuration 维护独立规则与子目录，因此可共享 binaryDir；Ninja 的单配置构建树只保存一套规则，重新配置 Debug/Release 会替换 cache 与构建图。
+- 卡点或误解：Codex 命令环境同时包含 `PATH` 和 `Path`，使 MSBuild 启动编译器时因重复环境变量键失败；在验证命令中临时移除重复项后构建成功，preset 无需修改。
+- 下一步：复盘 P2 的变量、option、模块和 preset，确认能独立为新项目设计可复现的配置入口。
