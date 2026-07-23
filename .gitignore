@@ -5,7 +5,10 @@
 .idea/
 .vscode/
 
-# CMake build trees and generated files
+# Disposable workspace output
+out/
+
+# CMake build trees and generated files (at any topic depth)
 build/
 cmake-build-*/
 CMakeCache.txt

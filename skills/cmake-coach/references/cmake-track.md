@@ -2,7 +2,7 @@
 
 Use this only for a CMake learning path. Adapt the pace to the learner and the repository.
 
-When the current repository contains `learning/roadmap.md`, use it as the learner's canonical progress plan. Its phases map directly to the official [CMake Tutorial](https://cmake.org/cmake/help/latest/guide/tutorial/index.html).
+Use `topics/cmake/learning/roadmap.md` as the learner's canonical progress plan. Its phases map directly to the official [CMake Tutorial](https://cmake.org/cmake/help/latest/guide/tutorial/index.html).
 
 ## Recommended progression
 
