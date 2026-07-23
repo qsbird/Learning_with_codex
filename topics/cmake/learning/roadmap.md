@@ -85,6 +85,8 @@ cmake --build build
 
 退出标准：能在没有命令行记忆负担的情况下，使用 preset 复现开发与发布构建。
 
+完成记录（2026-07-23）：已通过 `debug` 与 `release` Ninja preset 分别复现 Debug/Release 构建，并通过 `vs-debug` 与 `vs-release` 对比单配置和多配置生成器；能够说明 cache 变量、`configuration` 与独立构建树的职责。
+
 ## P3 — target usage requirements 与库类型
 
 官方对应：[Step 4: In-Depth CMake Target Commands](https://cmake.org/cmake/help/latest/guide/tutorial/Step4/index.html) 与 [Step 5: In-Depth CMake Library Concepts](https://cmake.org/cmake/help/latest/guide/tutorial/Step5/index.html)。

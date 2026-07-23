@@ -384,3 +384,12 @@
 - 我能解释：Visual Studio 为每个 configuration 维护独立规则与子目录，因此可共享 binaryDir；Ninja 的单配置构建树只保存一套规则，重新配置 Debug/Release 会替换 cache 与构建图。
 - 卡点或误解：Codex 命令环境同时包含 `PATH` 和 `Path`，使 MSBuild 启动编译器时因重复环境变量键失败；在验证命令中临时移除重复项后构建成功，preset 无需修改。
 - 下一步：复盘 P2 的变量、option、模块和 preset，确认能独立为新项目设计可复现的配置入口。
+
+### 2026-07-23 — P2: 阶段复盘通过
+
+- 目标：确认能够独立选择变量、option、模块和 preset 的配置入口，并复现开发与发布构建。
+- 我的回答：`base` 是仅供继承的隐藏模板而 `default` 是可调用入口；Ninja 的 `--config Release` 不会切换构建类型；Release 且不构建应用的 Ninja preset 可继承 `no-app`，覆盖独立 `binaryDir` 和 `CMAKE_BUILD_TYPE=Release`。
+- 证据：此前已成功使用 `debug`/`release` preset 配置、构建隔离的 Ninja 构建树，且能够解释 Visual Studio 多配置的 `configuration` 与 Ninja 的 `CMAKE_BUILD_TYPE` 的不同职责。
+- 我能解释：普通变量受目录/函数作用域限制，cache variable 为可持久化的配置入口；`option()` 表达布尔开关，`include()` 加载模块；preset 将生成器、构建树和 cache 配置命名为可复现入口。
+- 卡点或误解：无。
+- 下一步：进入 P3，学习 target usage requirements，以及 `PRIVATE`、`PUBLIC` 与 `INTERFACE` 的选择原则。
