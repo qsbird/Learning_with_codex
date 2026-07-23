@@ -13,13 +13,14 @@ topics/
     exercises/         # small, focused practice projects
 learning/
   _templates/          # starting point for a new topic's records
-skills/
-  learning-coach/      # reusable, topic-neutral coaching workflow
-  <topic>-coach/       # optional domain-specific coaching skill
+.agents/
+  skills/
+    learning-coach/    # reusable, topic-neutral coaching workflow
+    <topic>-coach/     # optional domain-specific coaching skill
 out/                   # ignored local build and generated output
 ```
 
-Start with the topic index in [topics/README.md](topics/README.md). For a new subject, copy the record templates from `learning/_templates/`, add a topic README, and create a specialized skill only when the subject needs knowledge or workflow beyond `learning-coach`.
+Start with the topic index in [topics/README.md](topics/README.md). For a new subject, copy the record templates from `learning/_templates/`, add a topic README, and create a specialized skill under `.agents/skills/` only when the subject needs knowledge or workflow beyond `learning-coach`. Codex discovers this directory automatically after the repository is cloned.
 
 ## Current topics
 

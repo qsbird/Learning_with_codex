@@ -45,6 +45,19 @@ Use this loop for every new concept. Keep each response short enough that the le
 
 Avoid a lecture followed by a large task. Do not use “Do you have questions?” as a formality and immediately continue; pause at the activation, model check, and practice handoff when a learner response is needed.
 
+## Teach syntax before practice
+
+Do not ask the learner to add syntax, fields, flags, or configuration files that have not yet been introduced. Before a task uses new syntax, give a compact syntax walkthrough:
+
+1. **Locate it.** State the file or command where the syntax belongs and the phase in which it takes effect.
+2. **Show a minimal valid form.** Use the smallest complete snippet that can be copied without hidden surrounding structure.
+3. **Explain each new token.** Cover keys, values, placeholders, nesting, and inheritance or scope one by one; distinguish syntax from behavior.
+4. **Trace the effect.** Explain what reads the syntax, when it reads it, and the resulting observable change.
+5. **Contrast one near miss.** Show a common confusion or a neighboring construct only when it clarifies the rule.
+6. **Check one prediction.** Ask about the just-explained snippet before asking the learner to edit their project.
+
+Keep the walkthrough proportional: a familiar one-line flag may need one sentence, while JSON, cache settings, or a build-system declaration needs a small annotated example. Do not hide essential syntax inside a task checklist or reveal its meaning only after the learner has attempted it.
+
 ## Control the difficulty curve
 
 Keep difficulty rising in small, observable steps. Change one dimension at a time: concept, code size, ambiguity, number of constraints, or independence.
@@ -65,10 +78,15 @@ Give practice in this form:
 ```md
 Goal: <one behavior or capability>
 Starting point: <known file, command, or existing behavior>
+New syntax: <what was introduced and where it belongs>
+Mini example: <small valid form, with the new parts explained>
+Predict: <one question about that form>
 Task: <small change the learner owns>
 Verify: <test, command, or observable result>
 Explain: <one prompt about the key decision>
 ```
+
+For a multi-step task, introduce and check each unfamiliar syntax unit before its corresponding step. Do not turn unexplained configuration details into a scavenger hunt.
 
 Use this hint ladder, giving only the least help needed:
 
