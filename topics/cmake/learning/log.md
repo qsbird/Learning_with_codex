@@ -364,3 +364,13 @@
 - 我能解释：hidden preset 不可用是因为它承担公共配置模板的职责；条件 preset 在环境不匹配时不可用，是为了避免用户选择不兼容的构建入口。
 - 卡点或误解：首次创建时误将关闭应用的 cache 覆盖复制到 `windows-default`；已删除，因为它应继承默认应用构建行为。
 - 下一步：为 Debug 与 Release 创建可复现的 preset，并理解单配置生成器中 `CMAKE_BUILD_TYPE` 的作用。
+
+### 2026-07-23 — P2.10: Debug 与 Release preset
+
+- 目标：为 Ninja 单配置生成器创建隔离、可复现的 Debug 与 Release 构建入口。
+- 本课要点：Ninja 的 `CMAKE_BUILD_TYPE` 在配置阶段固定并写入 cache；不同构建类型必须使用独立的 `binaryDir`，不能在同一构建树中来回切换。
+- 我做了什么：新增继承 `default` 的 `debug` 与 `release` configure/build preset；分别设置独立构建目录，并通过 `cacheVariables` 设置 `CMAKE_BUILD_TYPE` 为 `Debug` 和 `Release`。首次将该变量误放在 preset 顶层，依据 CMake 的 `Invalid extra field` 错误修正为 `cacheVariables` 成员。
+- 证据：两个 preset 均成功配置、构建，且均生成 `app/hello.exe`；`out/cmake/p0-hello/debug/CMakeCache.txt` 记录 `CMAKE_BUILD_TYPE:STRING=Debug`，release 构建树记录 `CMAKE_BUILD_TYPE:STRING=Release`。
+- 我能解释：`CMAKE_BUILD_TYPE` 作为 configure preset 的 cache variable 传入，等价于配置时的 `-DCMAKE_BUILD_TYPE=...`；build preset 只构建已经生成的构建树，不能改变其配置。
+- 卡点或误解：无。
+- 下一步：对比 Ninja 的单配置行为与 Visual Studio 等多配置生成器，并理解 `--config` 的适用场景。
