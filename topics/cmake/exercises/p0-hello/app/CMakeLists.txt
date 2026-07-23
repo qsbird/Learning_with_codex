@@ -6,4 +6,5 @@ target_sources(hello
 target_link_libraries(hello
         PRIVATE
         greeting
+        greeting_headers
 )
