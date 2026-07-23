@@ -354,3 +354,13 @@
 - 我能解释：`base` 只是复用配置的模板，不能被直接配置，因此不需要 `binaryDir`；`default` 和 `no-app` 可直接作为 CMake 入口，必须各自拥有隔离的构建树。
 - 卡点或误解：无。
 - 下一步：学习 CMake 的条件 preset 与 `condition`，让不适用当前环境的配置入口自动隐藏。
+
+### 2026-07-23 — P2.9: 条件 preset
+
+- 目标：让仅适用于 Windows 的构建入口根据宿主环境自动可用或禁用。
+- 本课要点：`condition` 根据环境判断可调用性；`hidden: true` 是结构上仅供继承的模板，而 condition 用于在不兼容环境中禁用本可调用的入口。
+- 我做了什么：新增 `windows-default` configure/build preset，继承 `default`，提供专属 `binaryDir`，并以 `${hostSystemName} == Windows` 作为条件；删除了误加的 `HELLO_BUILD_APP=OFF` 覆盖，使其保留默认应用构建行为。
+- 证据：当前 Windows 环境的 `cmake --list-presets` 显示 `windows-default`；`cmake --preset windows-default` 与 `cmake --build --preset windows-default` 成功，运行 `out/cmake/p0-hello/windows-default/app/hello.exe` 输出 `Hello World from program input`。
+- 我能解释：hidden preset 不可用是因为它承担公共配置模板的职责；条件 preset 在环境不匹配时不可用，是为了避免用户选择不兼容的构建入口。
+- 卡点或误解：首次创建时误将关闭应用的 cache 覆盖复制到 `windows-default`；已删除，因为它应继承默认应用构建行为。
+- 下一步：为 Debug 与 Release 创建可复现的 preset，并理解单配置生成器中 `CMAKE_BUILD_TYPE` 的作用。

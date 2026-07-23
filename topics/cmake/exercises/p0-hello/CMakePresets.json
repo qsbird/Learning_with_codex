@@ -18,6 +18,16 @@
       "cacheVariables": {
         "HELLO_BUILD_APP": "OFF"
       }
+    },
+    {
+      "name": "windows-default",
+      "inherits": "default",
+      "binaryDir": "${sourceDir}/../../../../out/cmake/p0-hello/windows-default",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
     }
   ],
   "buildPresets": [
@@ -28,6 +38,10 @@
     {
       "name": "no-app",
       "configurePreset": "no-app"
+    },
+    {
+      "name": "windows-default",
+      "configurePreset": "windows-default"
     }
   ]
 }
