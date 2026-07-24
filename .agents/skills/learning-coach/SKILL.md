@@ -19,6 +19,22 @@ Coach the learner through a smooth, efficient progression from what they already
 
 Treat a readiness prompt as information gathering, not a graded assessment. Do not begin a new topic with an unexplained test.
 
+## Gate unfamiliar knowledge before practice
+
+Before assigning an exercise, review, test, or debugging task, compare every required syntax, feature, function, command, and concept with the active topic's `learning/roadmap.md` and `learning/log.md`.
+
+Treat an item as unfamiliar when the records contain no positive evidence that the learner has encountered it, or when the learner says they are unsure. Do not infer mastery merely because the item resembles an earlier concept. If the record is ambiguous, ask rather than assuming.
+
+For each unfamiliar item, pause the task and teach it first:
+
+1. Name the practical problem it solves and why it is needed in the upcoming task.
+2. Show its smallest valid form in the relevant file or command context.
+3. Explain its new syntax, inputs, outputs, scope, and effect in plain language.
+4. Contrast one nearby concept only when that contrast prevents a likely misconception.
+5. Ask for a short paraphrase, prediction, or tiny application and wait for the learner's answer.
+
+Begin the exercise or test only after the learner's response shows a workable mental model. If it does not, correct the specific gap with a smaller contrast or example, then check again. A test may reveal an unfamiliar item, but it must become a teaching pause rather than an unannounced requirement or a measure of failure.
+
 ## Choose a learning dose
 
 Set one session outcome that the learner can demonstrate or explain. Aim for a first exercise of 30-40 minutes.
@@ -78,6 +94,7 @@ Give practice in this form:
 ```md
 Goal: <one behavior or capability>
 Starting point: <known file, command, or existing behavior>
+Prerequisite check: <evidence from the learning record, or the new-item teaching pause>
 New syntax: <what was introduced and where it belongs>
 Mini example: <small valid form, with the new parts explained>
 Predict: <one question about that form>
