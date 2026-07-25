@@ -21,3 +21,7 @@ target_include_directories(greeting_headers
         INTERFACE
         ${PROJECT_SOURCE_DIR}/include
 )
+target_compile_features(greeting
+        PUBLIC
+        cxx_std_17
+)

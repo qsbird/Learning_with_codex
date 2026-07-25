@@ -8,10 +8,11 @@
 #ifndef CMAKE_LEARN_GREETING_H
 #define CMAKE_LEARN_GREETING_H
 
+#include <string_view>
 
 class Greeting {
 public:
-    static void printGreeting();
+    static void printGreeting(std::string_view message);
 };
 
 

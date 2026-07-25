@@ -404,3 +404,14 @@
 - 我能解释：编译定义的作用域取决于该信息是 target 的实现细节、公开接口要求，还是仅消费者的要求。
 - 卡点或误解：首次从仓库根目录执行 preset 失败；`CMakePresets.json` 位于练习目录，需在该目录运行 `cmake --preset ...`。
 - 下一步：学习 `target_compile_features`，把 C++ 语言标准要求作为可传播的 target usage requirement。
+
+### 2026-07-25 — P3.2: 公开接口的 C++17 要求
+
+- 目标：将公开接口使用的 C++ 语言特性作为 target usage requirement 传递给消费者。
+- 本课讲解：`target_compile_features` 使用 CMake 的抽象编译特性名称表达最低语言版本；当公开头文件使用 `std::string_view` 时，`cxx_std_17` 必须为 `PUBLIC`，使库和消费者均以至少 C++17 编译。
+- 我的问题与答案：学习者正确预测：若将该要求错误标为 `PRIVATE`，库可编译但包含公开头文件的 `main.cpp` 会在低于 C++17 的环境失败。
+- 我做了什么：将 `Greeting::printGreeting` 改为接收 `std::string_view`，并为 `greeting` 添加 `target_compile_features(greeting PUBLIC cxx_std_17)`。
+- 证据：在 `topics/cmake/exercises/p0-hello/` 执行 `cmake --preset debug` 与 `cmake --build --preset debug --verbose` 成功；`greeting.cpp` 与 `main.cpp` 的实际编译命令均包含 `-std=gnu++17`。运行 `out/cmake/p0-hello/debug/app/hello` 输出 `Hello World from program input` 与 `text.h welcome`。
+- 我能解释：语言标准要求应附着在使用该特性的 target 上；公开接口中的要求必须向消费者传播。
+- 卡点或误解：清理旧练习目录后，终端仍停留在已删除目录会导致 `Current working directory cannot be established`；应切换至 `topics/cmake/exercises/p0-hello/`。
+- 下一步：学习 `target_compile_options`，区分编译器选项与可移植的 CMake 编译特性。

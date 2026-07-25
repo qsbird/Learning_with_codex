@@ -3,7 +3,7 @@
 #include "greeting/text.h"
 
 int main() {
-    Greeting::printGreeting();
+    Greeting::printGreeting("Hello World from program input");
     printHello();
     return 0;
 }
