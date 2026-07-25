@@ -19,7 +19,7 @@ add_library(greeting_headers INTERFACE)
 
 target_include_directories(greeting_headers
         INTERFACE
-        ${PROJECT_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/header_only/include
 )
 target_compile_features(greeting
         PUBLIC

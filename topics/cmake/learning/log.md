@@ -437,3 +437,14 @@
 - 我能解释：库类型改变的是产物和运行时分发模型；`PUBLIC`/`PRIVATE` usage requirements 与 target 链接关系不因静态或共享库而改变。
 - 卡点或误解：从静态库切换后，旧 `libgreeting.a` 不再属于当前构建图却仍留在构建目录；已删除该可再生产物，避免误判当前库类型。
 - 下一步：学习 header-only 接口库与对象库，并比较它们为何不等同于静态或共享库。
+
+### 2026-07-25 — P3.5: 独立 header-only 接口库
+
+- 目标：让 `INTERFACE` target 传播独有的 header-only 使用要求，而非重复已有库的 include 路径。
+- 本课讲解：接口库不编译 `.cpp` 或产出传统库文件；它可将自己的公开 include 路径、编译特性、定义或依赖传递给消费者。target 若不提供独有构建信息，就只是多余的抽象。
+- 我的问题与答案：学习者起初预测删除 `greeting_headers` 会导致找不到原 `greeting/text.h`；已澄清该路径此前也由 `greeting` 的 `PUBLIC` include 路径提供，因此接口库当时没有实际贡献。
+- 我做了什么：将 header-only 代码移至 `header_only/include/greeting_text/text.h`，使 `greeting_headers` 以 `INTERFACE` 传播独有的 `header_only/include` 路径；`hello` 同时包含 `<greeting/greeting.h>` 与 `<greeting_text/text.h>`。
+- 证据：在 `topics/cmake/exercises/p0-hello/` 执行 `cmake --preset debug`、`cmake --build --preset debug --verbose` 成功；`main.cpp` 编译命令同时包含项目 `include` 与 `header_only/include`，随后运行 `out/cmake/p0-hello/debug/app/hello` 输出 `Hello World from program input` 与 `text.h welcome`。
+- 我能解释：`greeting` 负责提供有编译实现的 API；`greeting_headers` 负责提供独立 header-only API 的使用要求。消费者链接两个 target，分别获得两套接口。
+- 卡点或误解：移动头文件时一度遗漏 `<greeting/greeting.h>`，导致 `Greeting` 未声明；恢复两个 include 后构建通过。已移除新目录中的 `.DS_Store` 元数据文件。
+- 下一步：学习对象库（`OBJECT`）如何复用编译后的对象文件，以及它为何不同于链接库。
