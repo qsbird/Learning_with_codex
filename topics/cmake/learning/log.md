@@ -426,3 +426,14 @@
 - 我能解释：具体编译器选项通常属于 target 自身的构建质量策略；只有确属公开使用要求时才考虑向消费者传播。
 - 卡点或误解：无。
 - 下一步：学习静态库、共享库、接口库和对象库的输出与使用场景。
+
+### 2026-07-25 — P3.4: 静态库与共享库
+
+- 目标：理解 `STATIC` 与 `SHARED` 的链接产物、运行时依赖和 target 依赖图差异。
+- 本课讲解：target 依赖使用 target 名而不依赖库类型；静态库代码在链接时并入消费者，共享库在运行时由可执行程序加载，因此部署时必须考虑动态库定位。
+- 我的问题与答案：学习者正确说明：将 `greeting` 从 `STATIC` 改为 `SHARED` 后，`hello` 仍会由 `target_link_libraries` 正确链接；新增风险发生在动态库未能加载的运行阶段。
+- 我做了什么：将 `greeting` 切换为 `SHARED`，并观察生成的动态库。
+- 证据：在 `topics/cmake/exercises/p0-hello/` 执行 `cmake --preset debug` 与 `cmake --build --preset debug --clean-first` 成功，生成 `out/cmake/p0-hello/debug/src/libgreeting.dylib`。`otool -L out/cmake/p0-hello/debug/app/hello` 显示 `@rpath/libgreeting.dylib`，运行程序输出 `Hello World from program input` 与 `text.h welcome`。
+- 我能解释：库类型改变的是产物和运行时分发模型；`PUBLIC`/`PRIVATE` usage requirements 与 target 链接关系不因静态或共享库而改变。
+- 卡点或误解：从静态库切换后，旧 `libgreeting.a` 不再属于当前构建图却仍留在构建目录；已删除该可再生产物，避免误判当前库类型。
+- 下一步：学习 header-only 接口库与对象库，并比较它们为何不等同于静态或共享库。

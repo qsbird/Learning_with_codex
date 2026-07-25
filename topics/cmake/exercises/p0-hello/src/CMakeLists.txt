@@ -1,4 +1,4 @@
-add_library(greeting STATIC)
+add_library(greeting SHARED)
 target_sources(greeting
         PRIVATE
         greeting.cpp
