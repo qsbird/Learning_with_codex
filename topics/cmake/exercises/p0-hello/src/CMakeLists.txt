@@ -11,6 +11,10 @@ target_compile_definitions(greeting
         PUBLIC
         GREETING_HAS_LIBRARY=1
 )
+target_compile_definitions(greeting
+        PRIVATE
+        GREETING_IMPLEMENTATION=1
+)
 add_library(greeting_headers INTERFACE)
 
 target_include_directories(greeting_headers

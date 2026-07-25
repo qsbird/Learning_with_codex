@@ -393,3 +393,14 @@
 - 我能解释：普通变量受目录/函数作用域限制，cache variable 为可持久化的配置入口；`option()` 表达布尔开关，`include()` 加载模块；preset 将生成器、构建树和 cache 配置命名为可复现入口。
 - 卡点或误解：无。
 - 下一步：进入 P3，学习 target usage requirements，以及 `PRIVATE`、`PUBLIC` 与 `INTERFACE` 的选择原则。
+
+### 2026-07-25 — P3.1: 公开与私有编译定义
+
+- 目标：按“谁需要使用该信息”选择 `target_compile_definitions` 的 `PRIVATE`、`PUBLIC` 与 `INTERFACE` 作用域。
+- 本课讲解：`PUBLIC` 同时服务 target 自身与消费者；`PRIVATE` 仅服务 target 自身；`INTERFACE` 仅向消费者传播。接口库没有自身编译阶段，因而只能声明 `INTERFACE` usage requirements。
+- 我的问题与答案：学习者正确预测：将库内部宏改为 `INTERFACE` 时，`greeting.cpp` 会因看不到宏而触发 `#error`；也正确说明公开宏改为 `PRIVATE` 时会使 `main.cpp` 失败。
+- 我做了什么：为 `greeting` 添加 `PRIVATE` 的 `GREETING_IMPLEMENTATION=1`，并在 `greeting.cpp` 中用预处理器检查其可见性。
+- 证据：在 `topics/cmake/exercises/p0-hello/` 执行 `cmake --preset debug` 与 `cmake --build --preset debug --clean-first --verbose` 成功；`greeting.cpp` 的编译命令包含 `-DGREETING_HAS_LIBRARY=1 -DGREETING_IMPLEMENTATION=1`，`main.cpp` 的编译命令仅包含 `-DGREETING_HAS_LIBRARY=1`。运行 `out/cmake/p0-hello/debug/app/hello` 输出 `Hello World from program input` 与 `text.h welcome`。
+- 我能解释：编译定义的作用域取决于该信息是 target 的实现细节、公开接口要求，还是仅消费者的要求。
+- 卡点或误解：首次从仓库根目录执行 preset 失败；`CMakePresets.json` 位于练习目录，需在该目录运行 `cmake --preset ...`。
+- 下一步：学习 `target_compile_features`，把 C++ 语言标准要求作为可传播的 target usage requirement。
