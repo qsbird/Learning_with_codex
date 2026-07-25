@@ -448,3 +448,14 @@
 - 我能解释：`greeting` 负责提供有编译实现的 API；`greeting_headers` 负责提供独立 header-only API 的使用要求。消费者链接两个 target，分别获得两套接口。
 - 卡点或误解：移动头文件时一度遗漏 `<greeting/greeting.h>`，导致 `Greeting` 未声明；恢复两个 include 后构建通过。已移除新目录中的 `.DS_Store` 元数据文件。
 - 下一步：学习对象库（`OBJECT`）如何复用编译后的对象文件，以及它为何不同于链接库。
+
+### 2026-07-25 — P3.6: 对象库复用
+
+- 目标：理解 `OBJECT` 库复用对象文件的方式，并将同一份源码组装为静态库与共享库。
+- 本课讲解：对象库编译源码却不生成传统库文件；`$<TARGET_OBJECTS:...>` 取用已经编译的对象文件。将对象库用于共享库时，需要位置无关代码。
+- 我的问题与答案：学习者正确说明：若静态库和共享库各自直接列出同一个 `.cpp`，源码会编译两次；对象库消除的是该重复编译步骤。
+- 我做了什么：创建独立的 `p3-object-library` 练习，定义 `message_objects`、`message_static` 与 `message_shared`，并为对象库设置 `POSITION_INDEPENDENT_CODE ON`。
+- 证据：`cmake -S topics/cmake/exercises/p3-object-library -B out/cmake/p3-object-library -G Ninja` 与 `cmake --build out/cmake/p3-object-library --clean-first --verbose` 成功；`message.cpp` 仅编译为一次 `message.cpp.o`，随后分别生成 `libmessage_static.a` 和 `libmessage_shared.dylib`。
+- 我能解释：对象库是编译结果的复用节点，而静态库/共享库是将对象文件打包或链接后的最终库产物。
+- 卡点或误解：无。
+- 下一步：复盘 P3 的 usage requirements 与库类型选择，并决定是否需要在当前 `greeting` 项目中采用对象库结构。

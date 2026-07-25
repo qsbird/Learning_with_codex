@@ -156,7 +156,7 @@ cmake --build consumer/build
 | P0 | 已完成 | 2026-07-18 | 最小项目以 Ninja + Apple Clang 成功 configure、build、run；完成概念问答 | 2026-07-26 |
 | P1 | 已完成 | 2026-07-19 | 分目录 `greeting` 静态库与 `hello` 可执行程序成功构建运行；完成复盘小测 | 2026-07-26 |
 | P2 | 已完成 | 2026-07-19 | 已通过变量、option、模块与 preset 的阶段复盘；成功复现 Debug/Release 与多配置构建 | 2026-08-01 |
-| P3 | 进行中 | 2026-07-25 | 已验证 usage requirements 传播边界，并完成共享库与独立 header-only 接口库练习 | 完成 usage requirements 与库类型练习后安排 |
+| P3 | 进行中 | 2026-07-25 | 已验证 usage requirements 传播边界，并完成共享库、header-only 接口库与对象库练习 | 完成 usage requirements 与库类型练习后安排 |
 | P4 | 未开始 |  |  |  |
 | P5 | 未开始 |  |  |  |
 
