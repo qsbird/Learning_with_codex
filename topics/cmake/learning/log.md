@@ -415,3 +415,14 @@
 - 我能解释：语言标准要求应附着在使用该特性的 target 上；公开接口中的要求必须向消费者传播。
 - 卡点或误解：清理旧练习目录后，终端仍停留在已删除目录会导致 `Current working directory cannot be established`；应切换至 `topics/cmake/exercises/p0-hello/`。
 - 下一步：学习 `target_compile_options`，区分编译器选项与可移植的 CMake 编译特性。
+
+### 2026-07-25 — P3.3: target-local 编译器警告选项
+
+- 目标：区分可移植的 `target_compile_features` 与具体编译器参数的 `target_compile_options`，并避免将库的诊断策略传播给消费者。
+- 本课讲解：编译特性表达“代码需要的能力”，由 CMake 映射到当前工具链；编译选项直接传递工具链参数。`-Wall`、`-Wextra` 或 `/W4` 是库实现的质量检查策略，应保持 `PRIVATE`。
+- 我的问题与答案：学习者正确说明：若将警告选项标为 `PUBLIC`，`hello` 也会收到这些参数，造成不必要的消费者编译策略污染。
+- 我做了什么：按编译器分支为 `greeting` 添加私有警告选项：Apple Clang、Clang、GNU 使用 `-Wall -Wextra`，MSVC 使用 `/W4`。
+- 证据：在 `topics/cmake/exercises/p0-hello/` 执行 `cmake --preset debug`、`cmake --build --preset debug --clean-first --verbose` 成功；`greeting.cpp` 编译命令包含 `-Wall -Wextra`，`main.cpp` 编译命令没有这两个参数。运行 `out/cmake/p0-hello/debug/app/hello` 成功。
+- 我能解释：具体编译器选项通常属于 target 自身的构建质量策略；只有确属公开使用要求时才考虑向消费者传播。
+- 卡点或误解：无。
+- 下一步：学习静态库、共享库、接口库和对象库的输出与使用场景。

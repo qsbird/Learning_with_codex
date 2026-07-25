@@ -25,3 +25,15 @@ target_compile_features(greeting
         PUBLIC
         cxx_std_17
 )
+if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang|Clang|GNU")
+    target_compile_options(greeting
+            PRIVATE
+            -Wall
+            -Wextra
+    )
+elseif(MSVC)
+    target_compile_options(greeting
+            PRIVATE
+            /W4
+    )
+endif()
