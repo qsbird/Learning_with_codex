@@ -5,5 +5,6 @@ Each directory is self-contained: its learning records describe what has been le
 | Topic | Focus | Entry point |
 | --- | --- | --- |
 | [CMake](cmake/README.md) | Modern target-based CMake | `topics/cmake/` |
+| [Qt](qt/README.md) | Qt 6 Widgets, CMake, and optional project mapping | `topics/qt/` |
 
 To add another topic, follow the root [workspace guide](../README.md) and start its records from `../learning/_templates/`.
