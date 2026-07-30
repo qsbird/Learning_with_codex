@@ -41,3 +41,31 @@ elseif(MSVC)
             /W4
     )
 endif()
+configure_file(
+        "${CMAKE_CURRENT_SOURCE_DIR}/greeting_config.h.in"
+        "${CMAKE_CURRENT_BINARY_DIR}/generated/greeting_config.h"
+)
+
+set(generated_banner_header
+        "${CMAKE_CURRENT_BINARY_DIR}/generated/greeting_banner.h"
+)
+
+add_custom_command(
+        OUTPUT "${generated_banner_header}"
+        COMMAND "${CMAKE_COMMAND}" -E make_directory
+        "${CMAKE_CURRENT_BINARY_DIR}/generated"
+        COMMAND "${CMAKE_COMMAND}" -E copy_if_different
+        "${CMAKE_CURRENT_SOURCE_DIR}/greeting_banner.h.in"
+        "${generated_banner_header}"
+        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/greeting_banner.h.in"
+)
+
+target_sources(greeting
+        PRIVATE
+        "${generated_banner_header}"
+)
+
+target_include_directories(greeting
+        PRIVATE
+        "${CMAKE_CURRENT_BINARY_DIR}/generated"
+)
