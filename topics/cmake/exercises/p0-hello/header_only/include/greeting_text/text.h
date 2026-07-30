@@ -6,10 +6,10 @@
 #define HELLO_TEXT_H
 
 
+#include <string_view>
 #include <iostream>
-inline void printHello()
-{
-    std::cout << "text.h welcome" << std::endl;
+inline void printHello(std::string_view name) {
+    std::cout << "Hello, " << name << '\n';
 }
 
 #endif //HELLO_TEXT_H

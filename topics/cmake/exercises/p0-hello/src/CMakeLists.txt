@@ -17,6 +17,10 @@ target_compile_definitions(greeting
 )
 add_library(greeting_headers INTERFACE)
 
+target_compile_features(greeting_headers
+        INTERFACE
+        cxx_std_17
+)
 target_include_directories(greeting_headers
         INTERFACE
         ${PROJECT_SOURCE_DIR}/header_only/include

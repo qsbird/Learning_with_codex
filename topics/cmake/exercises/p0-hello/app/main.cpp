@@ -3,6 +3,6 @@
 
 int main() {
     Greeting::printGreeting("Hello World from program input");
-    printHello();
+    printHello("CMake");
     return 0;
 }
