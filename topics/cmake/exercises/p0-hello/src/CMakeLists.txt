@@ -1,4 +1,11 @@
 add_library(greeting SHARED)
+if(GREETING_IPO_SUPPORTED)
+    set_property(TARGET greeting
+            PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE
+    )
+else()
+    message(STATUS "greeting IPO disabled: ${GREETING_IPO_ERROR}")
+endif()
 target_sources(greeting
         PRIVATE
         greeting.cpp
