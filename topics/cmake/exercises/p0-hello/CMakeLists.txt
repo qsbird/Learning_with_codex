@@ -38,3 +38,14 @@ if(HELLO_BUILD_APP)
 endif()
 
 
+install(TARGETS greeting
+        RUNTIME DESTINATION bin
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+)
+install(DIRECTORY include/
+        DESTINATION include
+)
+install(DIRECTORY header_only/include/
+        DESTINATION include
+)

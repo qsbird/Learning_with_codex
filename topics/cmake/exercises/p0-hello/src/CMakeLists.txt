@@ -12,7 +12,8 @@ target_sources(greeting
 )
 target_include_directories(greeting
         PUBLIC
-        ${PROJECT_SOURCE_DIR}/include
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
 )
 target_compile_definitions(greeting
         PUBLIC
@@ -30,7 +31,8 @@ target_compile_features(greeting_headers
 )
 target_include_directories(greeting_headers
         INTERFACE
-        ${PROJECT_SOURCE_DIR}/header_only/include
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/header_only/include>
+        $<INSTALL_INTERFACE:include>
 )
 target_compile_features(greeting
         PUBLIC
