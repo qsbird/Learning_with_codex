@@ -1,6 +1,6 @@
 ---
 name: cmake-coach
-description: Guide CMake-specific learning sessions, exercises, learning plans, reviews, and verification in this workspace. Use when a learner asks to study CMake, work on a CMake exercise, understand CMakeLists.txt or CMake presets, or update CMake learning progress.
+description: Use when a learner asks to study CMake, work on a CMake exercise, understand CMakeLists.txt, generators, configurations, or CMake presets, or update CMake learning progress.
 ---
 
 # CMake Coach
