@@ -1,0 +1,30 @@
+{
+  "description": "Guard verified learning closure and surface pending Git synchronization.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s\\n' '{\"systemMessage\":\"Project lesson-closure enforcement requires Windows PowerShell and is unavailable on this host.\"}'",
+            "commandWindows": "powershell.exe -NoProfile -Command \"$source = '$event = [Console]::In.ReadToEnd() | ConvertFrom-Json\\n$root = git rev-parse --show-toplevel 2>$null\\nif ($LASTEXITCODE -ne 0) { ''{}''; exit 0 }\\n\\n$status = @(git -C $root status --porcelain=v1)\\n$learningDirty = @($status | Where-Object {\\n    $_ -match ''topics[/\\\\][^/\\\\]+[/\\\\]learning[/\\\\](log|roadmap)\\.md''\\n})\\n$conflicts = @(git -C $root diff --name-only --diff-filter=U)\\n$upstream = git -C $root rev-parse --abbrev-ref --symbolic-full-name ''@{upstream}'' 2>$null\\n$hasUpstream = $LASTEXITCODE -eq 0\\n$ahead = 0\\nif ($hasUpstream) {\\n    $ahead = [int](git -C $root rev-list --count ''@{upstream}..HEAD'')\\n}\\n\\nif ($learningDirty.Count -gt 0 -or $conflicts.Count -gt 0 -or\\n    -not $hasUpstream -or $ahead -gt 0) {\\n    @{\\n        hookSpecificOutput = @{\\n            hookEventName = ''SessionStart''\\n            additionalContext = ''上一次学习收尾可能尚未完成。开始新章节前，先检查学习日志、冲突、上游配置和未推送提交；恢复成功或报告准确阻塞后再教学。''\\n        }\\n    } | ConvertTo-Json -Compress -Depth 4\\n} else {\\n    ''{}''\\n}'; & ([scriptblock]::Create($source.Replace('\\n', [Environment]::NewLine)))\"",
+            "additionalContextLimit": 1200
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s\\n' '{\"systemMessage\":\"Project lesson-closure enforcement requires Windows PowerShell and is unavailable on this host.\"}'",
+            "commandWindows": "powershell.exe -NoProfile -Command \"$source = '$event = [Console]::In.ReadToEnd() | ConvertFrom-Json\\n$message = [string]$event.last_assistant_message\\nif ($message -notmatch ''章节状态：已完成'') { ''{}''; exit 0 }\\n\\n$reason = $null\\n$chapter = [regex]::Match($message, ''(?m)^章节：\\s*(\\S+)\\s*$'')\\n$logMatch = [regex]::Match(\\n    $message,\\n    ''(?m)^学习日志：已更新\\s+(topics/[^\\r\\n]+/learning/log\\.md)\\s*$''\\n)\\n$synced = [regex]::Match(\\n    $message,\\n    ''(?m)^仓库同步：已同步\\s+([0-9a-fA-F]{7,40})\\s*$''\\n)\\n$pending = [regex]::Match(\\n    $message,\\n    ''(?m)^仓库同步：待同步——(.+)\\s*$''\\n)\\n\\nif (-not $chapter.Success) { $reason = ''章节完成声明缺少章节编号。'' }\\nelseif (-not $logMatch.Success) { $reason = ''章节完成声明缺少具体的 Markdown 学习日志路径。'' }\\nelseif (-not $synced.Success -and -not $pending.Success) {\\n    $reason = ''章节完成声明缺少明确的仓库同步结果。''\\n}\\n\\n$root = git rev-parse --show-toplevel 2>$null\\nif (-not $reason -and $LASTEXITCODE -ne 0) { $reason = ''当前目录不在 Git 仓库中，无法验证学习收尾。'' }\\n\\nif (-not $reason) {\\n    $logPath = $logMatch.Groups[1].Value\\n    if (-not (Test-Path -LiteralPath (Join-Path $root $logPath))) {\\n        $reason = (''学习日志不存在：'' + $logPath)\\n    } elseif (@(git -C $root status --porcelain=v1 -- $logPath).Count -gt 0) {\\n        $reason = (''学习日志仍未提交：'' + $logPath)\\n    } elseif (@(git -C $root diff-tree --no-commit-id --name-only -r HEAD) -notcontains $logPath) {\\n        $reason = ''最新章节收尾提交没有包含声明的学习日志。''\\n    }\\n}\\n\\nif (-not $reason) {\\n    $head = (git -C $root rev-parse --short HEAD).Trim()\\n    $upstream = git -C $root rev-parse --abbrev-ref --symbolic-full-name ''@{upstream}'' 2>$null\\n    $hasUpstream = $LASTEXITCODE -eq 0\\n    $ahead = 0\\n    if ($hasUpstream) {\\n        $ahead = [int](git -C $root rev-list --count ''@{upstream}..HEAD'')\\n    }\\n\\n    if ($synced.Success) {\\n        $claimed = $synced.Groups[1].Value\\n        if (-not ($head.StartsWith($claimed) -or $claimed.StartsWith($head))) {\\n            $reason = (''同步声明中的提交 '' + $claimed + '' 与当前 HEAD '' + $head + '' 不一致。'')\\n        } elseif (-not $hasUpstream -or $ahead -gt 0) {\\n            $reason = ''本地提交尚未到达配置的上游，不能声明已同步。''\\n        }\\n    } elseif ($pending.Success -and $hasUpstream -and $ahead -eq 0) {\\n        $reason = ''Git 未显示待推送提交，待同步声明与仓库状态不一致。''\\n    }\\n}\\n\\nif ($reason -and $event.stop_hook_active) {\\n    @{\\n        continue = $false\\n        stopReason = $reason\\n        systemMessage = ''章节收尾门禁第二次仍未通过。本次任务结束，但不得把该章节视为已完成；下一次会话必须先恢复收尾。''\\n    } | ConvertTo-Json -Compress\\n} elseif ($reason) {\\n    @{ decision = ''block''; reason = $reason } |\\n        ConvertTo-Json -Compress\\n} else {\\n    ''{}''\\n}'; & ([scriptblock]::Create($source.Replace('\\n', [Environment]::NewLine)))\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
