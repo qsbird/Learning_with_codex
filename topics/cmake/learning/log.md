@@ -469,3 +469,47 @@
 - 我能解释：使用要求的作用域由“当前 target、消费者、或两者谁需要”决定；库类型由产物、运行时分发与对象复用需求决定。
 - 卡点或误解：无阻塞；注意对象库不直接代表传统链接库。
 - 下一步：进入 P4，学习系统能力探测、生成文件与 CTest。
+
+### 2026-07-31 — P4.1: 系统能力探测与配置头文件
+
+- 目标：在配置阶段探测可选系统能力，并把探测结果安全地交给 C++ 源码。
+- 本课讲解：`check_include_file_cxx()` 只检查头文件可用性；`check_cxx_source_compiles()` 编译一段最小源码，因此可确认 `getpid()` 在当前项目配置中实际可用。`configure_file()` 从模板生成随环境变化的配置头文件。
+- 我的问题与答案：学习者正确说明：当 `unistd.h` 或 `getpid()` 不可用时，对应宏不会定义/为 0；受条件编译保护的代码会在预处理阶段被排除，而不是等到链接阶段失败。
+- 我做了什么：增加 `HAVE_UNISTD_H` 与 `HAVE_GETPID` 探测；由 `greeting_config.h.in` 生成 `generated/greeting_config.h`，并在 `greeting.cpp` 中以该配置决定是否调用 `getpid()`。
+- 证据：`cmake --preset default` 成功；生成文件位于 `out/cmake/p0-hello/default/src/generated/greeting_config.h`，当前构建与运行均可通过。
+- 我能解释：配置结果属于当前构建树，而非跨机器共享的固定结论；配置头文件让 C++ 编译看到 CMake 已探测到的能力。
+- 卡点或误解：最初区分了“检查头文件存在”与“编译最小调用验证函数可用”的粒度差异。
+- 下一步：将生成文件作为构建图的显式输入，并验证增量更新。
+
+### 2026-07-31 — P4.2: 自定义命令、生成文件与 IPO 回退
+
+- 目标：让自定义生成的头文件在依赖变化时可靠地参与构建，并按工具链能力启用 IPO。
+- 本课讲解：`add_custom_command(OUTPUT ...)` 声明生成文件和依赖；将输出加入 `target_sources()` 后，CMake 才能把生成、重新编译与重新链接串进构建图。`check_ipo_supported()` 应在创建使用它的 target 前探测，而 `set_property(TARGET ...)` 必须在 `add_library(greeting ...)` 后执行。
+- 我的问题与答案：学习者正确说明：先探测可避免编译失败；探测结果只影响本机构建配置；target 需要先被声明，才可设置其 property。
+- 我做了什么：由 `greeting_banner.h.in` 通过 `copy_if_different` 生成 `generated/greeting_banner.h`；使用 `CheckIPOSupported` 探测后，仅在支持时给 `greeting` 设置 `INTERPROCEDURAL_OPTIMIZATION TRUE`，不支持时输出诊断并正常回退。
+- 证据：`cmake --preset default` 显示 `GREETING_IPO_SUPPORTED=NO`，当前 MinGW 的 LTO 测试报 `LTO support has not been enabled in this configuration`；主项目仍可 `cmake --build --preset default` 成功。
+- 我能解释：生成文件若未声明为 target 输入，构建器无法知道何时必须先生成它；能力探测的结果与 target 属性设置分别发生在配置阶段的不同正确时机。
+- 卡点或误解：曾把 `include(CheckIPOSupported)` 放在 `check_ipo_supported()` 之后，导致命令未知；已修正为先 include、后调用。
+- 下一步：为可执行产物注册 CTest，并辨析测试失败是项目行为还是进程环境问题。
+
+### 2026-07-31 — P4.3: CTest、共享库运行时与测试环境
+
+- 目标：注册并运行最小 smoke test，定位共享库程序在 Windows 下的运行时依赖。
+- 本课讲解：`enable_testing()` 开启测试；`add_test(NAME ... COMMAND ...)` 注册实际二进制命令；CTest 对进程退出码和输出断言负责，不替代单元测试框架。Windows 的共享库 DLL 需要在可执行文件同目录或系统搜索路径中可见。
+- 我的问题与答案：学习者正确说明：CTest 执行实际编译后的二进制产物；测试通过来自程序返回 0 与预期输出，而不是 CMake 自身“编译成功”。
+- 我做了什么：注册 `hello_smoke` 并用 `PASS_REGULAR_EXPRESSION` 断言输出；为 `hello` 添加 POST_BUILD 复制，使 `libgreeting.dll` 位于 `hello.exe` 同目录。
+- 证据：`ctest --test-dir out/cmake/p0-hello/default --output-on-failure` 在未设置 MinGW 运行时路径时以 `0xC0000135` 失败；把 `C:\Users\Qs\CLion 2025.3.3\bin\mingw\bin` 加到 PATH 后，测试通过 `1/1`。当前复验同样通过。
+- 我能解释：`libgreeting.dll` 的部署正确并不保证进程所有依赖都可加载；CTest 是否通过也取决于它启动进程时继承的环境。
+- 卡点或误解：原计划的 `HELLO_BUILD_APP=OFF` 边界 CTest 因本机 Ninja PATH 问题跳过，P4 暂不按阶段完成标记。
+- 下一步：把库产物与公开头文件安装到一个独立前缀。
+
+### 2026-08-01 — P5.1: 安装规则与可移动的使用接口
+
+- 目标：把共享库、导入库和两套公开头文件安装到独立前缀，并使将来导出的 target 不泄漏源码绝对路径。
+- 本课讲解：`install(TARGETS ...)` 按产物类型安装：Windows DLL 为 `RUNTIME`，导入库为 `ARCHIVE`，Unix 共享库为 `LIBRARY`；`install(DIRECTORY ...)` 复制公开头文件目录内容。`BUILD_INTERFACE` 与 `INSTALL_INTERFACE` 让同一 target 在源码树与安装树中使用不同 include 路径。
+- 我的问题与答案：学习者正确判断 DLL 安装到 `bin`、导入库安装到 `lib`、两套公开头文件安装到 `<prefix>/include`；也正确说明安装接口的相对路径可随前缀移动，而源码绝对路径不可。
+- 我做了什么：安装 `greeting` 到 `bin`/`lib`，把 `include/` 与 `header_only/include/` 的内容安装到同一 `include` 目录；为 `greeting` 和 `greeting_headers` 分别使用 `$<BUILD_INTERFACE:...>` 与 `$<INSTALL_INTERFACE:include>`。
+- 证据：`cmake --install C:\Users\Qs\Documents\Cmake-learn\out\cmake\p0-hello\default --prefix C:\Users\Qs\Documents\Cmake-learn\out\cmake\p0-hello\install` 成功；安装树含 `bin/libgreeting.dll`、`lib/libgreeting.dll.a`、`include/greeting/greeting.h`、`include/greeting_text/text.h`。
+- 我能解释：源码内部的 `header_only/include` 不应成为消费者 include 路径；安装接口应表达安装前缀下稳定且可迁移的布局。
+- 卡点或误解：首次从练习目录执行相对 `cmake --install out/...`，路径被解析到源码目录内；改用仓库根目录相对路径或绝对路径后成功。
+- 下一步：将 `greeting` 与 `greeting_headers` 导出为 targets 文件，生成包配置文件，并用独立 consumer 通过 `find_package()` 验证；P5 尚未完成。
