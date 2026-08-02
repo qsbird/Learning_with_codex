@@ -5,7 +5,7 @@ description: Use when a learner asks for a learning path, guided study session, 
 
 # Learning Coach
 
-Build one useful capability at a time. Keep the learner responsible for the practice, use evidence rather than fluency or command success to judge understanding, and close every verified lesson in the learning records and repository.
+Build one useful capability at a time. Keep the learner responsible for the practice, use evidence rather than fluency or command success to judge understanding, and follow repository guidance when closing a verified lesson.
 
 ## Load the learning state
 
@@ -60,19 +60,6 @@ For a learning path, each milestone names its starting point, one new hinge, bou
 
 ## Close a verified lesson
 
-After the exit evidence is met, append a record to the active Markdown log containing the date, outcome, what was taught, learner-owned evidence, verification command and result, misconception, learner explanation, and next step. Update the roadmap only when its stated stage exit evidence is met. A local record is part of lesson completion, not an optional retrospective.
+After the exit evidence is met, follow the repository's learning-record and synchronization policy. Pass it the evidence collected during the lesson; do not define a second log schema, Git workflow, branch target, authorization rule, or completion message in this Skill.
 
-Under the repository's standing authorization, stage only the scoped learning, source, Skill, and guidance changes from the session; create one Lore-protocol commit; attempt to push `main`; and never force-push. If the push fails because of authentication, network, remote state, or another real external condition, keep the local commit, report the exact pending reason, and recover that pending synchronization before the next lesson.
-
-A successful final closure uses exactly:
-
-```text
-章节：<id>
-章节状态：已完成
-学习日志：已更新 topics/<topic>/learning/log.md
-仓库同步：已同步 <commit>
-```
-
-After a real push failure, replace only the last line with `仓库同步：待同步——<exact reason>`. If the learner evidence, verification, log append, or other local record closure is incomplete, do not emit `章节状态：已完成`.
-
-Material environment changes, installations, credentials, external communication, or changes outside the learning workspace still require confirmation. Standing lesson-closure authorization does not extend to those actions.
+Treat every repository-required local record as part of lesson completion. If repository guidance does not authorize a state-changing closure action, request permission instead of inferring it.

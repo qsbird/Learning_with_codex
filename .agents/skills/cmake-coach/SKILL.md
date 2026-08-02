@@ -7,16 +7,9 @@ description: Use when a learner asks to study CMake, work on a CMake exercise, u
 
 **REQUIRED SUB-SKILL:** Use `learning-coach` for the complete teaching, practice, evidence, and verified lesson-closure workflow.
 
-## Load the CMake topic
-
-- Read `topics/cmake/AGENTS.md`, `topics/cmake/README.md`, and its `learning/profile.md`, `roadmap.md`, and `log.md` before selecting work.
+## Add CMake guidance
 
 - When planning or revising the route, read `references/cmake-track.md`.
 - When a lesson introduces generators, configurations, or `CMakePresets.json`, read `references/cmake-syntax-teaching.md` before teaching or assigning edits.
-
-## Apply CMake evidence
-
-- Begin from an existing exercise when practical and keep one primary CMake concept.
-- Follow topic guidance for target-based design and isolated output under `out/cmake/`.
+- Follow `../../../topics/cmake/AGENTS.md` for CMake project constraints.
 - Verify only the smallest behavior that proves the lesson: configure, build, executable run, or CTest.
-- Record the exact command, observable result, and remaining misconception through the shared lesson-closure workflow.
