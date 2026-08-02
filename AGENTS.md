@@ -22,13 +22,15 @@ This repository hosts multiple, independent learning topics. Shared conventions 
 - Verify a changed exercise with the smallest relevant configure, build, run, or test command before recording it as complete.
 - Append evidence and remaining misconceptions to the active topic's `learning/log.md` after each completed lesson.
 
-## End-of-session GitHub sync
+## Verified lesson closure
 
-At the end of a completed learning session, when tracked learning materials have changed:
+When a lesson meets its stated exit evidence, this repository grants standing authorization to:
 
-1. Inspect `git status` and stage only source, `topics/`, `learning/`, `.agents/skills/`, and relevant repository guidance.
-2. Do not stage generated build trees, IDE state, `.DS_Store`, or `.omx/` state.
-3. Create one Lore-protocol commit that describes the learning progress and verification.
-4. Push `main` to `origin`.
+1. append the outcome, evidence, misconception, and next step to the active topic's `learning/log.md`;
+2. update `learning/roadmap.md` only when a stage exit criterion is met;
+3. inspect `git status` and stage only the active lesson's source, learning records, Skills, and relevant guidance;
+4. create one Lore-protocol commit and push `main` to `origin`.
 
-If there are no changes, do not create an empty commit. If the push cannot authenticate or fails, report the exact blocker in the final session update.
+Do not request this authorization again. Do not create an empty commit or stage generated output, IDE state, `.DS_Store`, or `.omx/` state.
+
+If synchronization fails, preserve the local commit and report `仓库同步：待同步——<exact reason>`. Before a later session begins a new lesson, inspect and recover any uncommitted learning record, conflict, or local commit not present at the configured upstream. Never force-push to resolve a lesson-closing conflict.

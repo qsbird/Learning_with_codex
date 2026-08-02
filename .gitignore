@@ -4,6 +4,7 @@
 # Operating-system and IDE state
 .DS_Store
 .idea/
+.qtcreator/
 .vscode/
 
 # Disposable workspace output

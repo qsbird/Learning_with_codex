@@ -5,4 +5,3 @@
 - Enter project-mapping mode only when the learner explicitly supplies a local reference project. Record its identity and environment in `learning/profile.md`.
 - Treat a reference project as read-only unless a lesson explicitly authorizes a small, scoped change. Do not include it in this repository or commit its files here.
 - Before a new Qt API, CMake feature, or project pattern appears in an exercise or test, check this topic's learning record and teach it first when there is no evidence of prior learning.
-- Append reproducible verification evidence and misconceptions to `learning/log.md`; update `learning/roadmap.md` only after its stated exit evidence is met.
