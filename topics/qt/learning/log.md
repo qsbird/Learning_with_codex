@@ -55,3 +55,15 @@
 - 我能解释：`Ui::P1WidgetShell` 是 Qt 根据 `.ui` 生成的界面组装器，会创建和配置子控件；`QMainWindow window` 才是实际显示、接收事件并作为控件树根节点的窗口对象。
 - 卡点或误解：最初将 `.ui` 的 `<class>P1WidgetShell</class>` 与示例中的 `Ui::MainWindow` 混用，导致编译找不到类型；通过读取 `uic` 生成头文件并使用 `Ui::P1WidgetShell` 修正。
 - 下一步：P1.2 — 添加一个 qrc 图标，学习 `AUTORCC` 的输入和生成资源路径。
+
+### 2026-08-09 — P1.2: qrc 图标与 AUTORCC
+
+- 目标：用 `.qrc` 把图标嵌入可执行文件，并用 `:/...` 路径在界面中加载。
+- 新知识讲解：`.qrc` 是资源清单；`CMAKE_AUTORCC ON` 在构建阶段调用 `rcc`，把清单及其中文件编进二进制。运行时路径由 `prefix` 与 `<file>` 拼接而成，不是磁盘目录的镜像。macOS 上 `setWindowIcon` 往往看不到标题栏小图标，尤其从终端启动时；可用窗口内 `QLabel`/`QPixmap` 验证资源是否真的加载。
+- 理解检查：正确说明运行时从嵌入资源读取；只改图片内容、路径不变时只需重建。能解释 `:/icons/icons/icon.png` 来自 `prefix="/icons"` + `<file>icons/icon.png</file>` 的拼接，而非磁盘上存在 `:/icons/icons/`。
+- 可选项目对照：独立学习。
+- 我做了什么：启用 `CMAKE_AUTORCC`，添加 `icons.qrc` 与 `icons/icon.png`；用 `QLabel` 显示 `:/icons/icons/icon.png` 以在 macOS 上获得可见证据。
+- 证据：`cmake -S topics/qt/exercises/p1-widget-shell -B out/qt/p1-widget-shell -DCMAKE_PREFIX_PATH=/opt/homebrew/Cellar/qtbase/6.11.1` => 配置成功；`cmake --build out/qt/p1-widget-shell` => 出现 `Automatic RCC for icons.qrc` 与 `qrc_icons.cpp.o`，`Built target p1_widget_shell`；运行后窗口中央显示资源图标。
+- 我能解释：AUTORCC 的输入是 `.qrc` 及清单中的文件；构建时按拼接后的逻辑路径打包进可执行文件；运行时通过 `prefix` + `file` 形成的 `:/...` 路径读取。
+- 卡点或误解：起初未开启 `CMAKE_AUTORCC`；`<file>` 相对路径与磁盘位置不一致导致 make 找不到 `icon.png`；`QIcon(":/...")` 与 `.qrc` 路径一度错位；误以为 macOS 标题栏应像 Windows 一样显示 `setWindowIcon`。
+- 下一步：P1.3 — 引入需要 `Q_OBJECT` 的主窗口类，学习 `AUTOMOC` 的输入与产物；补齐菜单/工具栏骨架。
