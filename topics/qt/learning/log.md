@@ -43,3 +43,15 @@
 - 我能解释：关闭最后一个窗口的事件由 `QApplication` 事件循环处理；默认情况下它退出循环，`app.exec()` 返回，随后 `main` 结束。`target_compile_features` 绑定到单个 target，以免未来项目中的其他 target 被不必要地强制使用相同 C++ 标准。
 - 卡点或误解：最初按 `.app` 路径运行；但当前 CMake target 没有 `MACOSX_BUNDLE`，实际产物是普通可执行文件。已改用 `./out/qt/p0-hello-widget/p0_hello_widget`。
 - 下一步：P1 — 为主窗口引入 `find_package`、`target_link_libraries`、Designer `.ui` 与 qrc 资源。
+
+### 2026-08-09 — P1.1: Designer 表单与 AUTOUIC
+
+- 目标：用 Qt Designer 创建 `QMainWindow` 表单，并由 CMake 自动生成可供 C++ 使用的界面头文件。
+- 新知识讲解：`.ui` 是界面描述源文件；`CMAKE_AUTOUIC ON` 在构建阶段调用 `uic` 生成 `ui_*.h`。`.ui` 的 `<class>` 值决定生成的 `Ui::` 类型名；生成的 `Ui` 对象负责组装界面，实际的 `QMainWindow` 负责显示、事件循环参与和控件树根节点职责。
+- 理解检查：学习者起初认为修改既有 `.ui` 内容需要重新配置；已修正为只需构建，因为规则和源文件列表未变。能说明新增 `.ui` 并加入 target 时必须重新配置，以将新文件加入构建依赖图。
+- 可选项目对照：独立学习。
+- 我做了什么：用 Designer 创建 `mainwindow.ui`，设置窗口标题为 `P1 Widget Shell`；将表单、`main.cpp` 和 `CMakeLists.txt` 组成 `p1_widget_shell` target；按生成的 `Ui::P1WidgetShell` 类型修正了 C++ 端的类型名。
+- 证据：`cmake -S topics/qt/exercises/p1-widget-shell -B out/qt/p1-widget-shell -DCMAKE_PREFIX_PATH=/opt/homebrew/Cellar/qtbase/6.11.1` => 配置成功；`cmake --build out/qt/p1-widget-shell` => 输出 `Built target p1_widget_shell_autogen` 与 `Built target p1_widget_shell`；`./out/qt/p1-widget-shell/p1_widget_shell` => 显示标题为 `P1 Widget Shell` 的窗口。
+- 我能解释：`Ui::P1WidgetShell` 是 Qt 根据 `.ui` 生成的界面组装器，会创建和配置子控件；`QMainWindow window` 才是实际显示、接收事件并作为控件树根节点的窗口对象。
+- 卡点或误解：最初将 `.ui` 的 `<class>P1WidgetShell</class>` 与示例中的 `Ui::MainWindow` 混用，导致编译找不到类型；通过读取 `uic` 生成头文件并使用 `Ui::P1WidgetShell` 修正。
+- 下一步：P1.2 — 添加一个 qrc 图标，学习 `AUTORCC` 的输入和生成资源路径。
