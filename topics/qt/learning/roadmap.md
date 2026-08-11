@@ -157,7 +157,7 @@
 | 阶段 | 状态 | 首次开始 | 完成证据 | 下次复习 |
 |---|---|---|---|---|
 | P0 | 已完成 | 2026-08-09 | Qt 6.11.1（Homebrew）下从空构建目录 configure/build/run `p0-hello-widget`；能解释配置、构建和事件循环 | P2 完成后 |
-| P1 | 进行中 | 2026-08-09 | P1.1 `.ui`+AUTOUIC、P1.2 `.qrc`+AUTORCC 已完成；待 P1.3 AUTOMOC 与菜单/工具栏 |  |
+| P1 | 已完成 | 2026-08-09 | `p1-widget-shell`：`.ui`+AUTOUIC、`.qrc`+AUTORCC、`Q_OBJECT`+AUTOMOC；菜单/工具栏/状态栏与资源图标可验证；能说明三套 AUTO* 输入与缺 AUTOMOC 的链接失败 | P3 完成后 |
 | P2 | 未开始 |  |  |  |
 | P3 | 未开始 |  |  |  |
 | P4 | 未开始 |  |  |  |

@@ -67,3 +67,15 @@
 - 我能解释：AUTORCC 的输入是 `.qrc` 及清单中的文件；构建时按拼接后的逻辑路径打包进可执行文件；运行时通过 `prefix` + `file` 形成的 `:/...` 路径读取。
 - 卡点或误解：起初未开启 `CMAKE_AUTORCC`；`<file>` 相对路径与磁盘位置不一致导致 make 找不到 `icon.png`；`QIcon(":/...")` 与 `.qrc` 路径一度错位；误以为 macOS 标题栏应像 Windows 一样显示 `setWindowIcon`。
 - 下一步：P1.3 — 引入需要 `Q_OBJECT` 的主窗口类，学习 `AUTOMOC` 的输入与产物；补齐菜单/工具栏骨架。
+
+### 2026-08-11 — P1.3: MainWindow、Q_OBJECT 与 AUTOMOC
+
+- 目标：抽出带 `Q_OBJECT` 的 `MainWindow`，启用 `AUTOMOC`，用菜单/工具栏动作更新状态栏，并巩固三套自动处理的分工。
+- 新知识讲解：`Q_OBJECT` 标记类参与元对象系统；`CMAKE_AUTOMOC ON` 在构建阶段运行 `moc` 生成元对象代码。`Ui::` 组装器本身不需要 `Q_OBJECT`；需要 `moc` 的是声明了 `Q_OBJECT` 的窗口类。`connect` 的 context（第三个参数）绑定连接生命周期。
+- 理解检查：能说明无 `Q_OBJECT` 则一般不必 `AUTOMOC`；有 `Q_OBJECT` 无 `AUTOMOC` 时更可能在**链接**阶段失败。能列出 `AUTOUIC`←`.ui`、`AUTORCC`←`.qrc`（及清单文件）、`AUTOMOC`←含 `Q_OBJECT` 的类。
+- 可选项目对照：独立学习。
+- 我做了什么：新增 `mainwindow.h`/`.cpp`，`main` 只创建 `MainWindow`；CMake 打开 `AUTOMOC` 并加入头/源；菜单与工具栏共享 `About` 动作，点击后对话框 + 状态栏提示；中央区继续显示 qrc 图标。接线阶段在多次编译错误后由教练协助完成定稿。
+- 证据：`cmake --build out/qt/p1-widget-shell` => 出现 `Automatic MOC and UIC`，链接生成 `p1_widget_shell`；运行后 File/工具栏 About 可触发状态栏消息。
+- 我能解释：三套 AUTO* 的输入分工；缺 `AUTOMOC` 时常见链接期缺 `moc` 符号。
+- 卡点或误解：曾把失败阶段说成编译；曾在 `main` 外调 `setupUI`、lambda 未捕获 `this`/未设 context、误用 `ui->mainWindow`。
+- 下一步：P2 — QObject 对象树与信号槽（sender/receiver/context 与所有权）。
