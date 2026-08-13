@@ -15,7 +15,7 @@
 
 ## 学习模式
 
-- 选择：`独立学习` / `项目对照`
+- 选择：`独立学习`
 - 独立学习：默认使用 `topics/qt/exercises/`；不填写任何外部路径也可以开始。
 - 项目对照（仅在选择后填写）：
   - 项目名称：
@@ -40,21 +40,21 @@
 
 ## 环境记录
 
-- 记录日期：
-- 操作系统：
-- Qt 6 Kit 目录：
-- 编译器与版本：
-- CMake 与生成器：
-- Qt Creator（如使用）：
-- 在普通终端中可发现的 Qt 命令：
+- 记录日期：2026-08-13（Windows 机；此前 P0/P1 证据来自 macOS Homebrew Qt 6.11.1）
+- 操作系统：Windows 10/11（win32 10.0.26200）
+- Qt 6 Kit 目录：`C:/Software/Qt/6.11.0/msvc2022_64`
+- 编译器与版本：MSVC 19.51.36252.0（Visual Studio 18 2026）
+- CMake 与生成器：CMake 4.3.0；`Visual Studio 18 2026`（多配置，构建时 `--config Debug`）
+- Qt Creator（如使用）：`C:\Software\Qt\Tools\QtCreator`（本课用终端）
+- 在普通终端中可发现的 Qt 命令：PATH 上先找到的是 Qt 5.15.2（`D:\TempQT\msvc2019_64`）；配置/运行 Qt 6 练习必须显式使用 6.11.0 Kit，并把其 `bin` 放到 PATH 最前
 - 练习构建根目录：`out/qt/`
 
 不要假设 `PATH`、盘符、Qt 安装位置或外部项目在另一台机器上存在。每台机器重新记录自己的 Kit 即可。
 
 ## P0 前需要补齐的信息
 
-- 实际使用的 Qt 6 Kit：
-- 用于构建的终端（Developer PowerShell / Qt Creator / 其他）：
+- 实际使用的 Qt 6 Kit：`C:/Software/Qt/6.11.0/msvc2022_64`（本机）；macOS 课次曾用 Homebrew `qtbase/6.11.1`
+- 用于构建的终端（Developer PowerShell / Qt Creator / 其他）：PowerShell（仓库根目录）
 - 每周可投入时间：
-- 最小练习是否已有可重复的测试数据或可见结果：
-- 若选择项目对照：项目名称、修订和本次只读范围；否则填“不适用”。
+- 最小练习是否已有可重复的测试数据或可见结果：有。`p2-click-label` 点击后标签由 waiting 变为 clicked；运行需 Qt 6 `bin` 在 PATH 最前
+- 若选择项目对照：项目名称、修订和本次只读范围；否则填“不适用”。不适用

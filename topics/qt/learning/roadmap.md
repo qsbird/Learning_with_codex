@@ -158,7 +158,7 @@
 |---|---|---|---|---|
 | P0 | 已完成 | 2026-08-09 | Qt 6.11.1（Homebrew）下从空构建目录 configure/build/run `p0-hello-widget`；能解释配置、构建和事件循环 | P2 完成后 |
 | P1 | 已完成 | 2026-08-09 | `p1-widget-shell`：`.ui`+AUTOUIC、`.qrc`+AUTORCC、`Q_OBJECT`+AUTOMOC；菜单/工具栏/状态栏与资源图标可验证；能说明三套 AUTO* 输入与缺 AUTOMOC 的链接失败 | P3 完成后 |
-| P2 | 未开始 |  |  |  |
+| P2 | 进行中 | 2026-08-13 | P2.1：`p2-click-label` 点击按钮将标签改为 clicked；能标出 connect 四角色并说明 context |  |
 | P3 | 未开始 |  |  |  |
 | P4 | 未开始 |  |  |  |
 | P5 | 未开始 |  |  |  |

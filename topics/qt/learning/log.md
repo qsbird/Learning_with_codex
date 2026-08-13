@@ -79,3 +79,15 @@
 - 我能解释：三套 AUTO* 的输入分工；缺 `AUTOMOC` 时常见链接期缺 `moc` 符号。
 - 卡点或误解：曾把失败阶段说成编译；曾在 `main` 外调 `setupUI`、lambda 未捕获 `this`/未设 context、误用 `ui->mainWindow`。
 - 下一步：P2 — QObject 对象树与信号槽（sender/receiver/context 与所有权）。
+
+### 2026-08-13 — P2.1: connect 的四个角色与 context
+
+- 目标：用「按钮点击更新标签」标出 sender、signal、context、slot，并说明缺少 context 时的悬空风险。
+- 新知识讲解：`QObject::connect(sender, &Class::signal, context, functor)` 把事件接到要做的事上；第三参数绑定连接寿命。父对象 `this` 与 connect 的 context `this` 是两张网。
+- 理解检查：正确标出 P1 About 连接的四个角色。起初把「窗口销毁会连带销毁 sender」和 context 混在一起；已分开：对象树管子对象销毁，context 管连接断开。能说明无 context 且 sender 仍在时，lambda 仍会执行并对已销毁对象造成 UB。
+- 可选项目对照：独立学习。
+- 我做了什么：在 `p2-click-label` 中独立写出 `QObject::connect(button, &QPushButton::clicked, label, [label]() { label->setText(...); })`。context 选 `label`，因为槽操作的就是它。
+- 证据：`cmake -S topics/qt/exercises/p2-click-label -B out/qt/p2-click-label -DCMAKE_PREFIX_PATH="C:/Software/Qt/6.11.0/msvc2022_64"` => 配置成功（Visual Studio 18 2026 / MSVC）；`cmake --build out/qt/p2-click-label --config Debug` => `p2_click_label.vcxproj -> out\qt\p2-click-label\Debug\p2_click_label.exe`。运行前需把 `C:\Software\Qt\6.11.0\msvc2022_64\bin` 放到 PATH 最前，否则缺少 `Qt6Cored.dll`。点击按钮后标签由 `waiting` 变为 `clicked`。
+- 我能解释：四个角色；`label` 适合做 context；无第三参数时，危险出现在 label 已销毁而 button 仍在。当前代码里两者都以 `window` 为父对象，所以这个悬空情况不容易出现。
+- 卡点或误解：无概念性失败。工具摩擦：相对 `-S` 路径依赖仓库根目录；`--config Debugcd` 是把下一条命令粘进了配置名；Windows Debug 运行需要 Qt 6 Kit 的 `bin`，且不能让 PATH 上的 Qt 5.15.2（`D:\TempQT`）抢先。
+- 下一步：P2.2 — 对象树自动销毁，并对照 C++ 智能指针；用销毁或断开连接做一次行为验证。
