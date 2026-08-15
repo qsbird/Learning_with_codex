@@ -22,6 +22,14 @@ int main(int argc, char *argv[])
         label->setText(QStringLiteral("clicked"));
     });
 
+    auto *button2 = new QPushButton(QStringLiteral("delete"), &window);
+    button2->setGeometry(160, 64, 120, 32);
+
+    // 在这里接上：按钮 clicked -> delete label
+    QObject::connect(button2, &QPushButton::clicked, label, [label]() {
+        label->deleteLater();
+    });
+
     window.show();
     return app.exec();
 }

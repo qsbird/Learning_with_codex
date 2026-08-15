@@ -91,3 +91,15 @@
 - 我能解释：四个角色；`label` 适合做 context；无第三参数时，危险出现在 label 已销毁而 button 仍在。当前代码里两者都以 `window` 为父对象，所以这个悬空情况不容易出现。
 - 卡点或误解：无概念性失败。工具摩擦：相对 `-S` 路径依赖仓库根目录；`--config Debugcd` 是把下一条命令粘进了配置名；Windows Debug 运行需要 Qt 6 Kit 的 `bin`，且不能让 PATH 上的 Qt 5.15.2（`D:\TempQT`）抢先。
 - 下一步：P2.2 — 对象树自动销毁，并对照 C++ 智能指针；用销毁或断开连接做一次行为验证。
+
+### 2026-08-15 — P2.2: 对象树销毁与连接失效
+
+- 目标：说明 QObject 父子树与 `unique_ptr` 不是同一种所有权，并用销毁 context 验证连接失效。
+- 新知识讲解：父对象销毁时按对象树递归释放子对象；对象树只管 QObject 父子关系，`unique_ptr` 是通用 C++ 所有权。从槽里销毁对象应优先 `deleteLater()`，避免在当前调用栈中立刻 `delete` 同一 QObject。
+- 理解检查：正确预测不写 `delete` 也不泄漏（父析构带走子对象）。能区分对象树与智能指针。能说明销毁作为 context 的 `label` 后，接收对象没了、相关连接也没了，再点 `click` 不会再改文字。
+- 可选项目对照：独立学习。
+- 我做了什么：在 `p2-click-label` 增加 `delete` 按钮，对 `label` 调用 `deleteLater()`；context 仍为 `label`。
+- 证据：`cmake -S topics/qt/exercises/p2-click-label -B out/qt/p2-click-label -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qtbase` 与 `cmake --build out/qt/p2-click-label` => `Built target p2_click_label`；运行后 click → 文字变为 clicked；delete 后再 click → 不再更新且不崩溃。
+- 我能解释：对象树自动析构；销毁 context 会拆除以其为接收端的连接；槽内销毁用 `deleteLater`。
+- 卡点或误解：起初在槽里直接 `delete label`；已改为 `deleteLater()`。
+- 下一步：P3 — Widgets、布局、Action 与主窗口交互。Direct/Queued 与 `Q_PROPERTY` 延后到有跨线程或属性绑定时再专练。
