@@ -115,3 +115,15 @@
 - 我能解释：顶层唯一 layout；嵌套用 `addLayout`；拉伸与 `addStretch` 的用途。
 - 卡点或误解：双 layout 同时 `(&window)`；竖直顺序曾为按钮在上（可选调换）。
 - 下一步：P3.2 — `QAction` 与可启停计时，练习 UI 状态不能只靠一次初始化。
+
+### 2026-08-15 — P3.2: QTimer 启停与 UI 状态同步
+
+- 目标：用 Start/Stop 控制 `QTimer`，保持 Action 启用状态与运行状态一致，并在 timeout 时更新 ticks。
+- 新知识讲解：`QTimer` 到期发 `timeout`；关联控件的 enabled 必须在每次状态切换后刷新（如 `syncUi(bool)`）。`Q_UNUSED(x)` 仅用于消除“未使用变量”编译警告，不是运行时逻辑。
+- 理解检查：正确预测只初始化一次 enabled 时会一直只能 Start、不能 Stop。能说明控件状态相互约束，无法靠一次初始化覆盖全部交互。
+- 可选项目对照：独立学习。
+- 我做了什么：在 `p3-timer-tool` 实现 `syncUi`、Start/Stop 与 `timeout` 接线；一度漏接 `timeout` 导致 ticks 不变，已补上。
+- 证据：`cmake -S topics/qt/exercises/p3-timer-tool -B out/qt/p3-timer-tool -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qtbase`；`cmake --build out/qt/p3-timer-tool` => `Built target p3_timer_tool`；Start 后 ticks 增加且 Start/Stop 启用状态互换，Stop 后停止计数。
+- 我能解释：状态关联导致不能只初始化一次；漏接 `timeout` 时计时器可跑但 UI 数字不变。
+- 卡点或误解：漏写 `timeout` 连接；本机同时存在 `out/qt/p3-timer-tool` 与 CMake Tools 的 `out/qt/vscode/exercises/p3-timer-tool` 两份产物，需确认运行的是刚重建的那份。
+- 下一步：P4 — 模型/视图入门（先从 `QStringListModel` 开始）。
