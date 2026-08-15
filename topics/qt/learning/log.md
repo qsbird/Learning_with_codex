@@ -103,3 +103,15 @@
 - 我能解释：对象树自动析构；销毁 context 会拆除以其为接收端的连接；槽内销毁用 `deleteLater`。
 - 卡点或误解：起初在槽里直接 `delete label`；已改为 `deleteLater()`。
 - 下一步：P3 — Widgets、布局、Action 与主窗口交互。Direct/Queued 与 `Q_PROPERTY` 延后到有跨线程或属性绑定时再专练。
+
+### 2026-08-15 — P3.1: 布局管理器替换 setGeometry
+
+- 目标：用 `QVBoxLayout`/`QHBoxLayout` 排布标签与按钮，使窗口缩放时控件仍按相对关系排列。
+- 新知识讲解：布局描述相对关系而非绝对像素；一个 widget 只有一个顶层 layout；内层 layout 经 `addLayout` 挂到外层，构造时不要再传同一 `&window`。`addStretch` 可把多余空间吸到一侧，让控件靠左/靠右。
+- 理解检查：正确预测 `setGeometry` 不随窗口缩放；明白与布局同时设几何是抢控制权而非 UB。能说明变宽时多余水平空间主要分给按钮行，靠左可用 `addStretch`。
+- 可选项目对照：独立学习。
+- 我做了什么：在脚手架 `p3-layout-form` 中去掉 `setGeometry`，用外层竖直 + 内层水平布局；保留 click/clear 的 connect。起初内层也写了 `(&window)`，已改为无父构造再 `addLayout`。
+- 证据：`cmake -S topics/qt/exercises/p3-layout-form -B out/qt/p3-layout-form -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qtbase`；`cmake --build out/qt/p3-layout-form` => `Built target p3_layout_form`；运行后缩放时控件随布局变化，按钮仍能改标签文字。
+- 我能解释：顶层唯一 layout；嵌套用 `addLayout`；拉伸与 `addStretch` 的用途。
+- 卡点或误解：双 layout 同时 `(&window)`；竖直顺序曾为按钮在上（可选调换）。
+- 下一步：P3.2 — `QAction` 与可启停计时，练习 UI 状态不能只靠一次初始化。

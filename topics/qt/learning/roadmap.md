@@ -159,7 +159,7 @@
 | P0 | 已完成 | 2026-08-09 | Qt 6.11.1（Homebrew）下从空构建目录 configure/build/run `p0-hello-widget`；能解释配置、构建和事件循环 | P2 完成后 |
 | P1 | 已完成 | 2026-08-09 | `p1-widget-shell`：`.ui`+AUTOUIC、`.qrc`+AUTORCC、`Q_OBJECT`+AUTOMOC；菜单/工具栏/状态栏与资源图标可验证；能说明三套 AUTO* 输入与缺 AUTOMOC 的链接失败 | P3 完成后 |
 | P2 | 已完成 | 2026-08-13 | P2.1 四角色+context；P2.2 对象树 vs 智能指针，`deleteLater` 销毁 label 后连接失效可验证 | P4 完成后 |
-| P3 | 未开始 |  |  |  |
+| P3 | 进行中 | 2026-08-15 | P3.1：`p3-layout-form` 嵌套布局与缩放验证通过；待 P3.2 Action/计时与状态同步 |  |
 | P4 | 未开始 |  |  |  |
 | P5 | 未开始 |  |  |  |
 | P6 | 未开始 |  |  |  |
