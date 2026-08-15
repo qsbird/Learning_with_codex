@@ -17,7 +17,7 @@ Ask one high-value question when missing context would change the next lesson. T
 
 ## Prepare lesson scaffolding automatically
 
-When starting a new lesson, switching chapters, or assigning practice that needs new directories or files, inspect the repository and create the required scaffolding before handing the exercise to the learner. Prepare non-learning work such as directories, build manifests, starter source files, fixtures, resource containers, and test harnesses. Preserve existing learner changes and follow repository layout and generated-output rules.
+When starting a new lesson, switching chapters, or assigning practice that needs new directories or files, inspect the repository and create the required scaffolding before handing the exercise to the learner. Prepare non-learning work such as directories, build manifests, starter source files, fixtures, resource containers, and test harnesses. If topic guidance defines an aggregate build or IDE entry point, update it as part of the same scaffolding change. Preserve existing learner changes and follow repository layout and generated-output rules.
 
 Keep the scaffold minimal and verify its baseline when practical. Leave the learner only one or a few localized modifications that directly exercise the lesson's primary novelty; name those files, locations, acceptance criteria, and verification command. Do not make directory creation, boilerplate copying, repetitive markup, or unrelated tool setup part of the learner's task unless that operation is itself the capability being taught.
 

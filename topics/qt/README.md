@@ -15,6 +15,12 @@ Never assume that a particular external project, drive letter, or sibling direct
 2. Follow [learning/roadmap.md](learning/roadmap.md); append evidence to [learning/log.md](learning/log.md).
 3. Create one focused exercise under `exercises/` and keep generated output under `out/qt/`.
 
+## VS Code and CMake Tools
+
+Open the repository root in VS Code and point CMake Tools at `topics/qt/`. That directory contains a stable aggregate `CMakeLists.txt` exposing every available Qt exercise as a separate target, while each exercise remains independently configurable from the terminal.
+
+Select the active build and launch target in the CMake Tools sidebar. New lesson scaffolding adds its directory to the aggregate entry point, so the VS Code source directory does not change between chapters. Keep the machine-specific Qt Kit path in ignored local VS Code settings rather than committing it to the repository.
+
 ## Verification
 
 Use an isolated build tree for each exercise. For a Qt 6 Widgets exercise, the shape is:
