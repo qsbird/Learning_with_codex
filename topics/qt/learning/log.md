@@ -127,3 +127,15 @@
 - 我能解释：状态关联导致不能只初始化一次；漏接 `timeout` 时计时器可跑但 UI 数字不变。
 - 卡点或误解：漏写 `timeout` 连接；本机同时存在 `out/qt/p3-timer-tool` 与 CMake Tools 的 `out/qt/vscode/exercises/p3-timer-tool` 两份产物，需确认运行的是刚重建的那份。
 - 下一步：P4 — 模型/视图入门（先从 `QStringListModel` 开始）。
+
+### 2026-08-24 — P4.1: QStringListModel、view 与经 model 追加
+
+- 目标：把现成字符串模型接到 `QListView`，并通过 model 接口追加一行，使视图刷新。
+- 新知识讲解：数据在 model，显示在 view；`QModelIndex` 是格子地址，取值用 `model->data(index)`。改数据必须走 model（`setModel`、`insertRow`/`setData` 或 `setStringList`），model 会通知 view；只改 `stringList()` 的拷贝不会刷新。
+- 理解检查：正确预测未 `setModel` 时看不见 model 里已有的 alpha/beta。能说明必须改 model 才能增删改查列表。起初把 index 说成“返回数据行的接口”，已收紧为地址。
+- 可选项目对照：独立学习。
+- 我做了什么：在 `p4-string-list` 调用 `view->setModel(model)`；`add` 时 `insertRow` 再 `setData`。
+- 证据：`cmake -S topics/qt/exercises/p4-string-list -B out/qt/p4-string-list -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qtbase`；`cmake --build out/qt/p4-string-list` => `Built target p4_string_list`；运行后列表显示 alpha/beta，点 add 追加 gamma。
+- 我能解释：view 显示的数据来自 model；脱离 model 的 `QStringList` 拷贝不会驱动刷新。
+- 卡点或误解：index 与 data 的分工；IDE 构建目录仍可能是 `out/qt/vscode/exercises/p4-string-list`。
+- 下一步：P4.2 — 只读二维自定义模型，落实 `rowCount`/`data`/`index`/`parent` 与模型通知。

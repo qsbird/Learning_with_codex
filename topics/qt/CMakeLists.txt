@@ -9,6 +9,7 @@ set(QT_LEARNING_EXERCISES
     p2-click-label
     p3-layout-form
     p3-timer-tool
+    p4-string-list
 )
 
 foreach(exercise IN LISTS QT_LEARNING_EXERCISES)

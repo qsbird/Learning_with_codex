@@ -160,7 +160,7 @@
 | P1 | 已完成 | 2026-08-09 | `p1-widget-shell`：`.ui`+AUTOUIC、`.qrc`+AUTORCC、`Q_OBJECT`+AUTOMOC；菜单/工具栏/状态栏与资源图标可验证；能说明三套 AUTO* 输入与缺 AUTOMOC 的链接失败 | P3 完成后 |
 | P2 | 已完成 | 2026-08-13 | P2.1 四角色+context；P2.2 对象树 vs 智能指针，`deleteLater` 销毁 label 后连接失效可验证 | P4 完成后 |
 | P3 | 已完成 | 2026-08-15 | P3.1 嵌套布局缩放正确；P3.2 计时启停与 Action 状态同步，能说明状态不能只初始化一次 | P5 完成后 |
-| P4 | 未开始 |  |  |  |
+| P4 | 进行中 | 2026-08-15 | P4.1：`p4-string-list` setModel + insertRow/setData；能说明须改 model 才能刷新 view |  |
 | P5 | 未开始 |  |  |  |
 | P6 | 未开始 |  |  |  |
 | P7 | 未开始 |  |  |  |
