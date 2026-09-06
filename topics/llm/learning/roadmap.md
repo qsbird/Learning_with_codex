@@ -76,7 +76,7 @@ python3 topics/llm/exercises/m1-bigram/starter.py
 
 对应材料：[Let's build GPT](https://github.com/karpathy/ng-video-lecture) 中 self-attention 一节；[Attention Is All You Need](https://arxiv.org/abs/1706.03762) §3.2（只读 Scaled Dot-Product Attention 部分）。
 
-学习内容：位置编码（position embedding）、Query/Key/Value 线性投影、缩放点积、因果 mask（causal mask）、softmax 得到注意力权重。
+学习内容：位置编码（position embedding）、Query/Key/Value 线性投影、缩放点积、因果 mask（causal mask）、softmax 得到注意力权重、**上下文窗口（context window，即代码里的 `block_size`：模型一次能看多远的历史字符）**。
 
 练习：在 M1 的模型上增加一个自注意力头，替换/增强原来的 bigram 查表，让模型能看到更长的上下文。
 
@@ -88,7 +88,7 @@ python3 topics/llm/exercises/m1-bigram/starter.py
 
 对应材料：[Let's build GPT](https://github.com/karpathy/ng-video-lecture) 剩余部分；完成后对照 [nanoGPT](https://github.com/karpathy/nanoGPT) 的 `model.py`。
 
-学习内容：多头注意力（多个注意力头并行再拼接）、前馈网络（FFN）、残差连接、LayerNorm、把 attention+FFN 封装成一个 block 并堆叠多层。
+学习内容：多头注意力（多个注意力头并行再拼接）、前馈网络（FFN）、残差连接、LayerNorm、把 attention+FFN 封装成一个 block 并堆叠多层；亲手改变**上下文窗口**大小（`block_size`），观察对 loss 和生成效果的影响。
 
 练习：组装一个几层、维度较小的迷你 GPT（对照 nanoGPT 但参数量小得多，能在 CPU/`mps` 上快速跑完）。
 
@@ -120,10 +120,15 @@ python3 topics/llm/exercises/m1-bigram/starter.py
 |---|---|---|---|---|
 | M0 | 已完成 | 2026-09-06 | 拟合脚本 loss 36.08→0.011，`w=2.002, b=0.979`；独立正确复述 forward/backward/step/zero_grad 分工 | |
 | M1 | 已完成 | 2026-09-06 | loss 4.51→~1.9（参考 ln(48)=3.87）；生成样例含真实词片段与常见字母组合；独立正确复述数据→tokenizer→模型→loss→生成全链路 | |
-| M2 | 未开始 | | | |
+| M2 | 已完成 | 2026-09-06 | loss 3.94→1.87；生成样例出现大量完整真实单词；手算 softmax 权重与实际值吻合；正确解释 Q/K/V 动态权重机制与因果 mask 的信息泄漏问题 | |
 | M3 | 未开始 | | | |
 | M4 | 未开始 | | | |
 
 ## 暂不学习
 
 在完成 M4 前，不把 BPE/子词分词、分布式或多 GPU 训练、指令微调/RLHF、模型量化部署、超参数大规模搜索作为本次短期项目的任务。它们值得学习，但会分散“最小完整流程”这一核心体验。
+
+以下两项额外明确排除，原因是它们依赖的模型规模/训练阶段超出本项目范围，而不是被遗漏：
+
+- **推理思维链（Chain-of-Thought）**：这是对已训练好、参数量足够大（通常还经过指令微调/RLHF）的模型做提示词引导的技巧，属于使用现成大模型时的推理阶段技巧，不是从零训练迷你模型能体验到的机制。适合作为完全独立的后续小项目（用现成大模型研究提示词），不适合塞进本项目。
+- **后训练/对齐（指令微调、RLHF）**：需要的语料规模和训练阶段远超本项目的“最小闭环”定位，已经和 BPE、分布式训练一起列在上面。M4 的 temperature/top-k 采样是“生成阶段的后处理”，与此不同，属于本项目范围内。
