@@ -30,12 +30,12 @@ class BigramLanguageModel(nn.Module):
         super().__init__()
         # TODO 3: one embedding table where row i holds the logits for
         # "what comes after character i". Shape: (vocab_size, vocab_size).
-        self.token_table = None  # replace: nn.Embedding(vocab_size, vocab_size)
+        self.token_table = nn.Embedding(vocab_size, vocab_size)
 
     def forward(self, idx: torch.Tensor) -> torch.Tensor:
         """idx: (batch, time) integer ids -> logits: (batch, time, vocab_size)."""
         # TODO 3 (continued): look up idx in self.token_table.
-        logits = None  # replace
+        logits = self.token_table(idx)
         return logits
 
 
@@ -54,10 +54,10 @@ def generate(model: BigramLanguageModel, itos: dict, start_id: int, length: int,
     out_ids = [start_id]
     for _ in range(length):
         # TODO 6a: get logits for the current last character (idx[:, -1]).
-        logits = None  # replace: model(idx[:, -1:])[:, -1, :]
+        logits = model(idx[:, -1:])[:, -1, :]
 
         # TODO 6b: turn logits into probabilities and sample one next id.
-        next_id = None  # replace: torch.multinomial(F.softmax(logits, dim=-1), num_samples=1)
+        next_id = torch.multinomial(F.softmax(logits, dim=-1), num_samples=1)
 
         out_ids.append(int(next_id))
         idx = torch.tensor([[next_id]], device=device)
@@ -71,15 +71,15 @@ def main() -> None:
     text = CORPUS_PATH.read_text(encoding="utf-8")
 
     # TODO 1: build the character vocabulary and stoi/itos maps.
-    chars = None  # replace: sorted(set(text))
-    stoi = None  # replace: {ch: i for i, ch in enumerate(chars)}
-    itos = None  # replace: {i: ch for ch, i in stoi.items()}
+    chars = sorted(list(set(text)))
+    stoi = {ch: i for i, ch in enumerate(chars)}
+    itos = {i: ch for ch, i in stoi.items()}
     vocab_size = len(chars)
     print(f"vocab size: {vocab_size}")
     print(f"reference loss for a uniformly random model: ln({vocab_size}) = {math.log(vocab_size):.4f}")
 
     # TODO 2: encode the whole corpus into one 1D integer tensor.
-    data = None  # replace: torch.tensor([stoi[c] for c in text], dtype=torch.long)
+    data = torch.tensor([stoi[c] for c in text], dtype=torch.long)
 
     model = BigramLanguageModel(vocab_size).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=LEARNING_RATE)
@@ -90,10 +90,12 @@ def main() -> None:
 
         # TODO 4: cross-entropy between logits and yb.
         # Hint: logits.view(-1, vocab_size), yb.view(-1)
-        loss = None  # replace
+        loss = F.cross_entropy(logits.view(-1, vocab_size), yb.view(-1))
 
         # TODO 5: backward + optimizer step + zero_grad, in the right order.
-
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
         if step % 300 == 0:
             print(f"step {step:4d} | loss {loss.item():.4f}")
 
