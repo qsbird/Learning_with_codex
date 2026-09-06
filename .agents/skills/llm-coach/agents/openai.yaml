@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM Coach"
+  short_description: "Guide structured minimal-LLM learning sessions."
+  default_prompt: "Use $llm-coach to guide my next minimal LLM learning session."
