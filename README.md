@@ -25,3 +25,8 @@ Start with the topic index in [topics/README.md](topics/README.md). For a new su
 ## Current topics
 
 - [CMake](topics/cmake/README.md): target-based CMake, configuration, testing, packaging, and consumption.
+- [Qt](topics/qt/README.md): Qt 6 Widgets, model/view, asynchronous work, and reusable components.
+- [LLM](topics/llm/README.md): a bounded from-scratch language-model learning project.
+- [C++ Linux Systems](topics/cpp-linux-systems/README.md): modern C++, Linux diagnostics, concurrency, networking, and performance.
+
+The cross-topic 2026–2027 sequence is tracked in [the C++ career learning plan](learning/cpp-career-plan-2026-2027.md).

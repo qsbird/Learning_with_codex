@@ -7,3 +7,5 @@ Use these templates when adding a topic. Copy all three files into `topics/<topi
 - `log.md`: append-only evidence from completed sessions.
 
 Keep topic records beside the topic rather than in this shared directory. That prevents unrelated learning paths from sharing a status table or evidence log.
+
+Cross-topic plans may live in this directory when they coordinate several topic roadmaps without replacing them. The current example is [the 2026–2027 C++ career learning plan](cpp-career-plan-2026-2027.md).
