@@ -139,3 +139,15 @@
 - 我能解释：view 显示的数据来自 model；脱离 model 的 `QStringList` 拷贝不会驱动刷新。
 - 卡点或误解：index 与 data 的分工；IDE 构建目录仍可能是 `out/qt/vscode/exercises/p4-string-list`。
 - 下一步：P4.2 — 只读二维自定义模型，落实 `rowCount`/`data`/`index`/`parent` 与模型通知。
+
+### 2026-09-17 — P4.2: 只读二维 ResultModel
+
+- 目标：实现只读二维自定义模型，让 `QTableView` 显示 3 行姓名/分数，并解释 `rowCount`/`data`/`index`/`parent`。
+- 新知识讲解：view 通过模型契约询问尺寸与单元格，不直接读 `results_`；表模型在 `parent` 有效时 `rowCount`/`columnCount` 返回 0；`QAbstractTableModel` 已实现平坦表的 `index()` 与 `parent()`；`data` 用 `DisplayRole` 和列号从已有数据作答。
+- 理解检查：正确预测当前 stub 会显示空表，但起初把原因说成缺少 `insertRow`/`setData`；已纠正为初始数据靠契约函数报告。随后能判断 `rowCount(根)=3`、`rowCount(单元格)=0`。独立说明二维表不必自己实现 `index()`/`parent()`，因为基类已提供。
+- 可选项目对照：独立学习。
+- 我做了什么：在 `resultmodel.cpp` 实现 `rowCount`、`columnCount`、`data`。首次实现忽略 `parent` 且 `data` 只返回 score；经提示后补上 parent 规则和按列返回 name/score。`QString` 与 `int` 不能直接用于同一三元表达式，改为两侧都包成 `QVariant`。
+- 证据：`cmake -S topics/qt/exercises/p4-readonly-table -B out/qt/p4-readonly-table -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qtbase`；`cmake --build out/qt/p4-readonly-table` => `Built target p4_readonly_table`。非 GUI 询问模型：`rows=3 cols=2 childRows=0 cellParentValid=0 a00=alpha a01=91 a10=beta a11=84 a20=gamma a21=96 emptyRole=0`。
+- 我能解释：`setModel` 只建立连接；view 看到的行数和文字分别来自 `rowCount` 与 `data`。二维表是平的，格子没有父节点，`index(row, column)` 只编址行列，因此沿用 `QAbstractTableModel` 的 `index()`/`parent()`，不必在子类重复实现。
+- 卡点或误解：把 P4.1 的 `insertRow`/`setData` 误当成初始显示的前提；第一次 `data` 两列都返回分数；三元运算符要求两端类型一致。
+- 下一步：P4 仍进行中——模型通知（如 `dataChanged` / `beginInsertRows`）或一次事件分发；按年度计划约 09-24 收口。
