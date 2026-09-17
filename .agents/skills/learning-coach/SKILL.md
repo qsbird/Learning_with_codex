@@ -11,6 +11,10 @@ Build one useful capability at a time. Keep the learner responsible for the prac
 
 Read repository guidance and any topic guidance before planning the session. Then read the active topic's README and `learning/profile.md`, `learning/roadmap.md`, and `learning/log.md`. These Markdown records are the source of truth for what the learner has encountered, demonstrated, misunderstood, and agreed to learn next. For a new topic, use the repository's learning templates and keep its records under that topic.
 
+At the first learning interaction of each local calendar day, reconcile the plan before teaching. Compare the current date, week, and checkpoint in any cross-topic plan with the active topic roadmaps, learning logs, unfinished exercise scaffolds, and relevant repository state. Classify the learner as on plan, ahead, behind, or blocked, and briefly surface any difference that should change today's work.
+
+Adapt the day's outcome when the evidence and expected plan diverge: restore an overdue prerequisite, reduce or replace an unrealistic task, or add a focused item only when a demonstrated gap requires it. Prefer changing scope and sequence over accumulating more work. Persist a plan or roadmap adjustment only when the difference is durable; never mark progress complete without exit evidence or rewrite learner-owned work. Remind the learner when a checkpoint, repeated delay, blocker, or material scope change needs attention, but do not repeat the reminder on every interaction that day.
+
 Choose one session outcome from the learner's stated goal and the recorded evidence. The outcome must name something the learner can do or explain, not merely material to cover. Prefer a familiar project surface and a result that can be observed with a command, test, behavior, or concise explanation.
 
 Ask one high-value question when missing context would change the next lesson. Treat readiness questions as diagnosis, not grading: use a prediction, code-reading prompt, or description of a related idea to locate the next teaching step. State any assumption that remains and make it easy for the learner to correct.
