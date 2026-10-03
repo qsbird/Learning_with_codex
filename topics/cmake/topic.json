@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "id": "cmake",
+  "title": "CMake",
+  "goal": "维护可测试、可安装并能被独立项目消费的现代 CMake 包",
+  "status": "active",
+  "coverage_note": "增量索引当前课次；全部历史与阶段出口见 roadmap/log。",
+  "lessons": [
+    {
+      "id": "cmake.P3",
+      "title": "usage requirements 阶段复盘",
+      "stage": "P3",
+      "prerequisites": [],
+      "sources": [
+        "cmake-tutorial"
+      ],
+      "roadmap": {
+        "file": "learning/roadmap.md",
+        "section": "P3 — target usage requirements 与库类型"
+      },
+      "exercise": "exercises/p0-hello",
+      "verify": [
+        {
+          "cwd": ".",
+          "command": "cmake --preset debug -S exercises/p0-hello"
+        }
+      ]
+    },
+    {
+      "id": "cmake.P4.3",
+      "title": "CTest 与运行环境",
+      "stage": "P4",
+      "prerequisites": [
+        "cmake.P3"
+      ],
+      "sources": [
+        "cmake-tutorial"
+      ],
+      "roadmap": {
+        "file": "learning/roadmap.md",
+        "section": "P4 — 探测、生成与测试"
+      },
+      "exercise": "exercises/p0-hello",
+      "verify": [
+        {
+          "cwd": ".",
+          "command": "ctest --test-dir ../../out/cmake/p0-hello/default --output-on-failure"
+        }
+      ]
+    },
+    {
+      "id": "cmake.P4.4",
+      "title": "应用关闭时的边界验证",
+      "stage": "P4",
+      "prerequisites": [
+        "cmake.P4.3"
+      ],
+      "sources": [
+        "cmake-tutorial"
+      ],
+      "roadmap": {
+        "file": "learning/roadmap.md",
+        "section": "P4 — 探测、生成与测试"
+      },
+      "exercise": "exercises/p0-hello",
+      "verify": [
+        {
+          "cwd": ".",
+          "command": "cmake -S exercises/p0-hello -B ../../out/cmake/p4-app-off -G Ninja -DHELLO_BUILD_APP=OFF"
+        },
+        {
+          "cwd": ".",
+          "command": "cmake --build ../../out/cmake/p4-app-off"
+        },
+        {
+          "cwd": ".",
+          "command": "cmake --build ../../out/cmake/p4-app-off --target help"
+        },
+        {
+          "cwd": ".",
+          "command": "ctest --test-dir ../../out/cmake/p4-app-off -N"
+        }
+      ]
+    },
+    {
+      "id": "cmake.P5.1",
+      "title": "安装规则与可移动接口",
+      "stage": "P5",
+      "prerequisites": [
+        "cmake.P3"
+      ],
+      "sources": [
+        "cmake-tutorial"
+      ],
+      "roadmap": {
+        "file": "learning/roadmap.md",
+        "section": "P5 — 安装、包、依赖与高级表达"
+      },
+      "exercise": "exercises/p0-hello",
+      "verify": [
+        {
+          "cwd": ".",
+          "command": "cmake --install ../../out/cmake/p0-hello/default --prefix ../../out/cmake/p0-hello/install"
+        }
+      ]
+    },
+    {
+      "id": "cmake.P5.2",
+      "title": "导出包并验证独立 consumer",
+      "stage": "P5",
+      "prerequisites": [
+        "cmake.P4.4",
+        "cmake.P5.1"
+      ],
+      "sources": [
+        "cmake-tutorial"
+      ],
+      "roadmap": {
+        "file": "learning/roadmap.md",
+        "section": "P5 — 安装、包、依赖与高级表达"
+      },
+      "exercise": null,
+      "verify": []
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "topic_id": "cmake",
+  "lesson_id": null,
+  "status": "idle",
+  "mode": "plan",
+  "phase": "prepare",
+  "pending_question": null,
+  "hint_level": 0,
+  "solution_shown": false,
+  "blocker": null,
+  "resume_action": "P4.4 已完成，证据已持久化到日志 cmake.P4.4.completed.2026-10-03；P4 阶段出口已满足。下次先检查 Git 同步与短复习，再准备 P5.2 的 targets 导出和独立 consumer；P5.2 尚未开始。",
+  "updated_at": "2026-10-03",
+  "plan_checked_on": "2026-10-03"
+}

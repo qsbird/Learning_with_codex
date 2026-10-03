@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "topic_id": "cmake",
+  "as_of": "2026-10-03",
+  "log_sha256": "9dd601c0494c68e3ffb87d398b5800552389b6f25e86ca6f5ae96ead70de7310",
+  "lessons": [
+    {
+      "id": "cmake.P3",
+      "status": "verified",
+      "legacy_completion": true,
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-07-25 — P3: 阶段复盘通过",
+          "kind": "practice",
+          "assistance": "unknown"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-07-25 — P3: 阶段复盘通过",
+          "kind": "verification",
+          "assistance": "unknown"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-07-25 — P3: 阶段复盘通过",
+          "kind": "explanation",
+          "assistance": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "cmake.P4.3",
+      "status": "verified",
+      "legacy_completion": true,
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-07-31 — P4.3: CTest、共享库运行时与测试环境",
+          "kind": "practice",
+          "assistance": "unknown"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-07-31 — P4.3: CTest、共享库运行时与测试环境",
+          "kind": "verification",
+          "assistance": "unknown"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-07-31 — P4.3: CTest、共享库运行时与测试环境",
+          "kind": "explanation",
+          "assistance": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "cmake.P4.4",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-03 — P4.4: APP=OFF 边界验证通过，待迁移解释",
+          "kind": "practice",
+          "assistance": "hint"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-03 — P4.4: APP=OFF 边界验证通过，待迁移解释",
+          "kind": "verification",
+          "assistance": "hint"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-03 — P4.4: APP=OFF 边界验证通过，待迁移解释",
+          "kind": "explanation",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-03 — P4.4: 应用关闭边界与测试注册条件验证完成",
+          "kind": "transfer",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-03 — P4.4: 应用关闭边界与测试注册条件验证完成",
+          "kind": "verification",
+          "assistance": "hint"
+        }
+      ]
+    },
+    {
+      "id": "cmake.P5.1",
+      "status": "verified",
+      "legacy_completion": true,
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-08-01 — P5.1: 安装规则与可移动的使用接口",
+          "kind": "practice",
+          "assistance": "unknown"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-08-01 — P5.1: 安装规则与可移动的使用接口",
+          "kind": "verification",
+          "assistance": "unknown"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-08-01 — P5.1: 安装规则与可移动的使用接口",
+          "kind": "explanation",
+          "assistance": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "cmake.P5.2",
+      "status": "planned",
+      "evidence": []
+    }
+  ],
+  "concepts": [
+    {
+      "id": "cmake.usage-requirements",
+      "level": "explained",
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-07-25 — P3: 阶段复盘通过",
+          "kind": "explanation",
+          "assistance": "unknown"
+        }
+      ],
+      "last_reviewed": null,
+      "next_review": "2026-08-01",
+      "review_prompt": "公开头文件使用 string_view 时，语言标准要求应放 PUBLIC 还是 PRIVATE？换成实现文件内部需求会怎样？"
+    },
+    {
+      "id": "cmake.optional-app-test-boundary",
+      "level": "explained",
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-03 — P4.4: 应用关闭边界与测试注册条件验证完成",
+          "kind": "transfer",
+          "assistance": "none"
+        }
+      ],
+      "last_reviewed": "2026-10-03",
+      "next_review": "2026-10-04",
+      "review_prompt": "APP=OFF 时为什么 greeting 保留而 hello 与 hello_smoke 不出现？为何 test 构建入口仍可能存在，但 CTest 的 Total Tests 为 0？"
+    }
+  ],
+  "notes": [
+    "增量索引 P3 复盘与 P4/P5 当前工作，旧课次仍以 roadmap/log 为准。",
+    "原有 P4/P5 未提交的进行中修订已保留；没有补写完成证据。",
+    "复习日期沿用旧路线，last_reviewed 未知。"
+  ]
+}

@@ -513,3 +513,33 @@
 - 我能解释：源码内部的 `header_only/include` 不应成为消费者 include 路径；安装接口应表达安装前缀下稳定且可迁移的布局。
 - 卡点或误解：首次从练习目录执行相对 `cmake --install out/...`，路径被解析到源码目录内；改用仓库根目录相对路径或绝对路径后成功。
 - 下一步：将 `greeting` 与 `greeting_headers` 导出为 targets 文件，生成包配置文件，并用独立 consumer 通过 `find_package()` 验证；P5 尚未完成。
+
+
+### 2026-10-03 — P4.4: APP=OFF 边界验证通过，待迁移解释
+
+- Entry ID: cmake.P4.4.boundary-check.2026-10-03
+- 目标：在独立构建树中验证关闭应用后，库仍可构建，应用及其 smoke test 不被创建。
+- 学习者解释（独立预测）：`greeting` 保留；`hello` 消失，因为上层 `add_subdirectory(app)` 被跳过；`hello_smoke` 消失，因为 `add_test()` 被跳过。学习者对库保留的原因为“不属于 hello 这个 target”。
+- 本课讲解与提示：教练细化库保留的直接原因为 `add_subdirectory(src)` 位于条件外；不同 target 本身不保证被创建。教练提供验证命令，说明 `ctest -N` 只列出测试。
+- 学习者操作：学习者报告已在终端运行给定命令；检查时独立构建树已存在，缓存 `HELLO_BUILD_APP:BOOL=OFF`，生成器为 Ninja。已有 `.ninja_log` 记录生成头文件、编译 `greeting.cpp.o`、链接 `src/libgreeting.dylib` 和执行 help。不是教练替学习者首次构建，命令框架由教练提供（assistance: hint）。
+- 配置命令（学习者按指导运行；本轮未重新配置）：`cmake -S topics/cmake/exercises/p0-hello -B out/cmake/p4-app-off -G Ninja -DHELLO_BUILD_APP=OFF`。已生成缓存与构建图，源目录指向本练习。
+- 教练复验：`cmake --build out/cmake/p4-app-off` 返回 0，输出 `ninja: no work to do.`，库产物存在。
+- 目标列表复验：`cmake --build out/cmake/p4-app-off --target help` 返回 0，列出 `greeting` 和 `libgreeting.dylib`，未列出 `hello`；构建图也未创建应用目标。
+- 测试列表复验：`ctest --test-dir out/cmake/p4-app-off -N` 返回 0，输出 `Total Tests: 0`；生成的 CTest 文件只有 `subdirs("src")`，没有 `hello_smoke` 注册。
+- 结果：边界行为符合预测；尚未按新课次完成，等待一个无提示迁移解释，不以给定命令通过代替独立应用证据。
+- 下一动作：保持 APP=OFF，假设只将 `add_test(NAME hello_smoke COMMAND hello)` 移出条件块，预测 CTest 列表与实际运行会怎样；评估学习者答案后收口。
+
+
+### 2026-10-03 — P4.4: 应用关闭边界与测试注册条件验证完成
+
+- Entry ID: cmake.P4.4.completed.2026-10-03
+- 结果：P4.4 已完成。接续本日 `cmake.P4.4.boundary-check.2026-10-03` 的实际构建与目标/测试列表验证，补齐无提示迁移预测。结合 2026-07-31 P4.1～P4.3 的生成文件、能力探测与失败测试定位证据，P4 阶段出口已满足；P5 仍进行中。
+- 本课知识：应用 target 和依赖该应用的 smoke test 由同一配置条件控制；无条件添加的库子目录仍创建库。测试注册与可执行文件存在是两件事，`ctest -N` 可检查注册列表。
+- 学习者拥有的证据：独立预测 `greeting` 保留、`hello` 与 `hello_smoke` 消失，并说明 app 子目录与 add_test 被条件跳过；按教练给出的命令在终端完成独立构建树的配置、构建及列表检查。命令执行属于有框架指导的练习（practice assistance: hint），没有把给定命令通过称为独立实现能力。
+- 验证命令与结果：仓库根目录 `cmake -S topics/cmake/exercises/p0-hello -B out/cmake/p4-app-off -G Ninja -DHELLO_BUILD_APP=OFF` 的已生成缓存确认 OFF/Ninja；已有 `.ninja_log` 记录编译及链接 `src/libgreeting.dylib`。教练复验 `cmake --build out/cmake/p4-app-off` 返回 0（`ninja: no work to do.`）；`cmake --build out/cmake/p4-app-off --target help` 返回 0，有 `greeting`、无 `hello`；`ctest --test-dir out/cmake/p4-app-off -N` 返回 0（`Total Tests: 0`）。本次没有重新配置，也没有修改学习者目标实现。
+- 迁移问题（无提示，无需改源码）：保持 APP=OFF，只将 `add_test(NAME hello_smoke COMMAND hello)` 移出条件，预测测试列表与执行行为。
+- 学习者原话：“应该会列出，但是实际执行会失败吧”。注册与执行的两个预测均正确（transfer assistance: none）；未把这个假设当作实际运行过的失败实验。
+- 解释与反馈：学习者独立辨认了测试注册与执行结果的差异。教练补充执行失败的具体原因是 `hello` 未构建，CTest 找不到可执行程序；该具体原因是教练反馈，不冒记为学习者原话。
+- 误解与提示：库保留的初始理由“不属于 hello 这个 target”不够精确，已由教练指出直接依据是 `add_subdirectory(src)` 位于条件外；命令框架与 `-N` 含义由教练提供。未提供或代写目标解答。
+- 复习：2026-10-04 做一个短回忆，解释为何 CTest 的 test 构建入口仍可能存在，但 `Total Tests: 0`；再回忆 APP=OFF 时应用与测试应如何配套控制。
+- 下一步：P5.2，导出 targets、生成 package config，并让独立 consumer 仅通过 `find_package()` 使用安装后的库；本次不提前声明其完成。

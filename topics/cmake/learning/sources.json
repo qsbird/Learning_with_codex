@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "cmake-tutorial",
+      "url": "https://cmake.org/cmake/help/latest/guide/tutorial/index.html",
+      "publisher": "Kitware / CMake",
+      "version": "当前页面 4.4.3；历史环境 4.3.0",
+      "section": "Step 4–5 targets / Step 8 CTest / Step 9–10 install and packages",
+      "checked_at": "2026-09-26",
+      "check_scope": "核对原始页面及章节入口；不代表在本机运行了所有示例。",
+      "limitations": "4.3 文档入口本次未能访问；使用 latest 核对章节，开课时对照实际 CMake 版本确认字段与命令。"
+    }
+  ]
+}
