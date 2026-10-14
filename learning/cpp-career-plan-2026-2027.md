@@ -3,7 +3,7 @@
 - 制定依据：2026-09-14 的职业画像与 C++ 学习路线
 - 计划周期：2026-09-14 至 2027-09-12
 - 可选市场延长窗口：2027-09-13 至 2027-12-12
-- 最近校正：2026-09-16，依据本仓库实际路线和日志
+- 最近校正：2026-10-14，依据本仓库实际路线和日志（含 CMake P5.2 延期决定）
 
 ## 1. 年度目标
 
@@ -41,6 +41,8 @@
 - `HELLO_BUILD_APP=OFF` 边界验证；
 - targets export、package config 和独立 consumer；
 - 从空目录重复 install/find_package 验证。
+
+2026-10-14 校正：P5.2（targets export、package config 与独立 consumer）由学习者决定延期、标记待复习，不阻塞其余 C0 项；脚手架保留在 `topics/cmake/exercises/p5-consumer/`，待真实项目需要时再实践。
 
 此后不再单独长期学习 CMake，而是在所有 C++ 项目中持续使用 target-based CMake、Presets、CTest、install/export/find_package。
 
@@ -180,7 +182,7 @@ M6 范围评审通过前不创建远程仓库。前期可保持 private，清除
 
 ### C0 — 2026-09-27：现有仓库收口
 
-- CMake P4/P5 的边界与 consumer 验证完成；
+- CMake P4 边界验证完成、P5.1 安装完成；consumer 项 2026-10-14 决定延期（不阻塞 C0）；
 - Qt P4 完成并能解释模型契约、通知与事件分发；
 - LLM M3 完成或记录唯一延期项；
 - 所有完成项有日志和命令证据；

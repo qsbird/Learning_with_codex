@@ -9,7 +9,7 @@
   "hint_level": 0,
   "solution_shown": false,
   "blocker": null,
-  "resume_action": "P4.4 已完成，证据已持久化到日志 cmake.P4.4.completed.2026-10-03；P4 阶段出口已满足。下次先检查 Git 同步与短复习，再准备 P5.2 的 targets 导出和独立 consumer；P5.2 尚未开始。",
-  "updated_at": "2026-10-03",
-  "plan_checked_on": "2026-10-03"
+  "resume_action": "P5.2 于 2026-10-14 由学习者决定延期（时间成本高、剩余内容优先级低），标记待复习、不计完成；脚手架保留在 exercises/p5-consumer/ 与 cmake/greetingConfig.cmake.in。CMake 不再作为活跃主题；下次进入本主题时按需安排 P5.2 复习，或在真实项目中实践导出/消费。",
+  "updated_at": "2026-10-14",
+  "plan_checked_on": "2026-10-14"
 }

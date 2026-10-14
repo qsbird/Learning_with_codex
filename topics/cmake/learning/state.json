@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "topic_id": "cmake",
-  "as_of": "2026-10-03",
-  "log_sha256": "9dd601c0494c68e3ffb87d398b5800552389b6f25e86ca6f5ae96ead70de7310",
+  "as_of": "2026-10-14",
+  "log_sha256": "55bcdbb67d4733fa7ba6573146e72fe00b1299fee31def1ef990157774eef9a3",
   "lessons": [
     {
       "id": "cmake.P3",
@@ -117,7 +117,7 @@
     },
     {
       "id": "cmake.P5.2",
-      "status": "planned",
+      "status": "deferred",
       "evidence": []
     }
   ],
@@ -133,8 +133,8 @@
           "assistance": "unknown"
         }
       ],
-      "last_reviewed": null,
-      "next_review": "2026-08-01",
+      "last_reviewed": "2026-10-14",
+      "next_review": "2026-10-28",
       "review_prompt": "公开头文件使用 string_view 时，语言标准要求应放 PUBLIC 还是 PRIVATE？换成实现文件内部需求会怎样？"
     },
     {
@@ -148,14 +148,16 @@
           "assistance": "none"
         }
       ],
-      "last_reviewed": "2026-10-03",
-      "next_review": "2026-10-04",
+      "last_reviewed": "2026-10-14",
+      "next_review": "2026-10-28",
       "review_prompt": "APP=OFF 时为什么 greeting 保留而 hello 与 hello_smoke 不出现？为何 test 构建入口仍可能存在，但 CTest 的 Total Tests 为 0？"
     }
   ],
   "notes": [
     "增量索引 P3 复盘与 P4/P5 当前工作，旧课次仍以 roadmap/log 为准。",
     "原有 P4/P5 未提交的进行中修订已保留；没有补写完成证据。",
-    "复习日期沿用旧路线，last_reviewed 未知。"
+    "复习日期沿用旧路线，last_reviewed 未知。",
+    "2026-10-14 学习者决定延期 cmake.P5.2（不计完成）；脚手架保留，待有真实需求时复习。",
+    "2026-10-14 完成两项到期短复习；usage requirements 的 PRIVATE 传播误解已现场修正。"
   ]
 }

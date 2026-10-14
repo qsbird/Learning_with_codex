@@ -543,3 +543,13 @@
 - 误解与提示：库保留的初始理由“不属于 hello 这个 target”不够精确，已由教练指出直接依据是 `add_subdirectory(src)` 位于条件外；命令框架与 `-N` 含义由教练提供。未提供或代写目标解答。
 - 复习：2026-10-04 做一个短回忆，解释为何 CTest 的 test 构建入口仍可能存在，但 `Total Tests: 0`；再回忆 APP=OFF 时应用与测试应如何配套控制。
 - 下一步：P5.2，导出 targets、生成 package config，并让独立 consumer 仅通过 `find_package()` 使用安装后的库；本次不提前声明其完成。
+
+### 2026-10-14 — P5.2: 学习者决定延期（不计完成）
+
+- Entry ID: cmake.P5.2.deferred.2026-10-14
+- 决定：停止 P5.2（targets export、package config、独立 consumer）的当前学习，标记延期，后续有真实需求或时间时再复习；不按“已完成”记录，也不修改已完成的 P5.1。
+- 理由（学习者判断）：投入时间过长、复习成本高；剩余内容当前优先级低。
+- 已做与未做：脚手架已准备（`exercises/p5-consumer/` 的 CMakeLists 骨架与 `main.cpp`、`cmake/greetingConfig.cmake.in` 模板）；未做任何导出或消费者实现改动，无验证证据。
+- 复习：本日完成两项到期短复习（P4.4 应用关闭边界、usage requirements 作用域），其中 PRIVATE 不向消费者传播的误解已现场修正。
+- 影响：C0 的 CMake consumer 项随本决定延期，不阻塞其余 C0 项；CMake 不再作为活跃主题，后续在真实项目中实践 target-based 构建与消费。
+- 下一步：推进其余 C0 项（LLM M3 有界收尾 → C++ Systems M0 无 AI 基线）。
