@@ -12,3 +12,21 @@ add_executable(p4_readonly_table
 
 target_compile_features(p4_readonly_table PRIVATE cxx_std_17)
 target_link_libraries(p4_readonly_table PRIVATE Qt6::Widgets)
+
+add_executable(p4_readonly_table_notify_check EXCLUDE_FROM_ALL
+    check_notification.cpp
+    resultmodel.cpp
+    resultmodel.h
+)
+
+target_compile_features(p4_readonly_table_notify_check PRIVATE cxx_std_17)
+target_link_libraries(p4_readonly_table_notify_check PRIVATE Qt6::Widgets)
+
+add_executable(p4_readonly_table_name_check EXCLUDE_FROM_ALL
+    check_name_notification.cpp
+    resultmodel.cpp
+    resultmodel.h
+)
+
+target_compile_features(p4_readonly_table_name_check PRIVATE cxx_std_17)
+target_link_libraries(p4_readonly_table_name_check PRIVATE Qt6::Widgets)

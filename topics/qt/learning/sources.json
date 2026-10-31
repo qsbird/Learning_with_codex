@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "qt-item-model",
+      "url": "https://doc.qt.io/qt-6/qabstractitemmodel.html",
+      "publisher": "The Qt Company",
+      "version": "在线页面 Qt 6.12.0；2026-10-20 本机 qtpaths 查询 Qt 6.11.1",
+      "section": "data; dataChanged; 既有值变化与结构变化的边界",
+      "checked_at": "2026-10-20",
+      "check_scope": "重查 data 返回 role 对应值，dataChanged 同 parent、包含端点的范围及省略 roles 的含义；核对先改数据再通知的契约。阅读材料不展开插入行实现。",
+      "limitations": "未运行官方示例；现有练习在 Qt 6.11.1 下通过分数检查，姓名空实现检查按预期失败；未观察 GUI。教练准备不构成学习者证据。"
+    },
+    {
+      "id": "qt-table-model",
+      "url": "https://doc.qt.io/qt-6/qabstracttablemodel.html",
+      "publisher": "The Qt Company",
+      "version": "在线页面 Qt 6.12.0；本机 Qt 6.11.1",
+      "section": "Detailed Description; Subclassing",
+      "checked_at": "2026-10-20",
+      "check_scope": "核对二维表 rowCount/columnCount/data 职责及 index/parent 默认实现。",
+      "limitations": "未运行官方示例；本课只涉及平坦表与既有单元格更新，不教学视图内编辑。"
+    },
+    {
+      "id": "qt-model-index",
+      "url": "https://doc.qt.io/qt-6/qmodelindex.html",
+      "publisher": "The Qt Company",
+      "version": "在线页面 Qt 6.12.0；本机 Qt 6.11.1",
+      "section": "Detailed Description; row; column; parent",
+      "checked_at": "2026-10-20",
+      "check_scope": "核对索引定位模型项、行列与 parent 关系、无效索引用于根层。",
+      "limitations": "材料中的地址比喻仅帮助理解，不表示 QModelIndex 是数据值或裸内存地址；不教学持久索引。"
+    }
+  ]
+}

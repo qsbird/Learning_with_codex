@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "id": "qt",
+  "title": "Qt 6 Widgets",
+  "goal": "解释并实现可验证的模型、视图与事件行为",
+  "status": "active",
+  "coverage_note": "增量索引当前课次；全部历史与阶段出口见 roadmap/log。",
+  "lessons": [
+    {
+      "id": "qt.P4.2",
+      "title": "只读二维模型",
+      "stage": "P4",
+      "prerequisites": [],
+      "sources": [
+        "qt-item-model"
+      ],
+      "roadmap": {
+        "file": "learning/roadmap.md",
+        "section": "P4 — 模型/视图、事件与拖放"
+      },
+      "exercise": "exercises/p4-readonly-table",
+      "verify": [
+        {
+          "cwd": ".",
+          "command": "cmake -S . -B ../../out/qt/aggregate"
+        },
+        {
+          "cwd": ".",
+          "command": "cmake --build ../../out/qt/aggregate --target p4_readonly_table"
+        }
+      ]
+    },
+    {
+      "id": "qt.P4.3",
+      "title": "模型通知与视图更新",
+      "stage": "P4",
+      "prerequisites": [
+        "qt.P4.2"
+      ],
+      "sources": [
+        "qt-item-model",
+        "qt-table-model",
+        "qt-model-index"
+      ],
+      "roadmap": {
+        "file": "learning/roadmap.md",
+        "section": "P4 — 模型/视图、事件与拖放"
+      },
+      "exercise": "exercises/p4-readonly-table",
+      "verify": [
+        {
+          "cwd": ".",
+          "command": "cmake -S exercises/p4-readonly-table -B ../../out/qt/p4-readonly-table-notify -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qtbase"
+        },
+        {
+          "cwd": ".",
+          "command": "cmake --build ../../out/qt/p4-readonly-table-notify --target p4_readonly_table_notify_check"
+        },
+        {
+          "cwd": ".",
+          "command": "../../out/qt/p4-readonly-table-notify/p4_readonly_table_notify_check"
+        },
+        {
+          "cwd": ".",
+          "command": "cmake --build ../../out/qt/p4-readonly-table-notify --target p4_readonly_table_name_check"
+        },
+        {
+          "cwd": ".",
+          "command": "../../out/qt/p4-readonly-table-notify/p4_readonly_table_name_check"
+        }
+      ]
+    }
+  ]
+}

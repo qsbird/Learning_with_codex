@@ -51,6 +51,14 @@
 
 不要假设 `PATH`、盘符、Qt 安装位置或外部项目在另一台机器上存在。每台机器重新记录自己的 Kit 即可。
 
+### 2026-10-20 — 当前 macOS 会话观察
+
+- 上面的 Windows Kit 保留为历史环境；本次在 macOS 独立学习，无外部参考项目。
+- Qt 前缀：`/opt/homebrew/opt/qtbase`；运行该目录下 `bin/qtpaths --qt-version` 返回 `6.11.1`。
+- CMake `4.3.0`，生成器 `Unix Makefiles`，配置识别编译器为 `AppleClang 21.0.0.21000101`。
+- 聚合构建目录：`out/qt/aggregate-20261020`；本课分数与姓名检查 target 均可构建，分数行为检查通过，姓名空实现检查按预期返回 1。未观察 GUI。
+- 这些是教练环境验证；学习者能力仍依据日志中的本人实现与解释。本章按学习者要求重新从阅读开始。
+
 ## P0 前需要补齐的信息
 
 - 实际使用的 Qt 6 Kit：`C:/Software/Qt/6.11.0/msvc2022_64`（本机）；macOS 课次曾用 Homebrew `qtbase/6.11.1`
@@ -58,3 +66,8 @@
 - 每周可投入时间：
 - 最小练习是否已有可重复的测试数据或可见结果：有。`p2-click-label` 点击后标签由 waiting 变为 clicked；运行需 Qt 6 `bin` 在 PATH 最前
 - 若选择项目对照：项目名称、修订和本次只读范围；否则填“不适用”。不适用
+
+### 2026-10-31 — 本章收口环境观察
+
+- macOS 独立学习；Qt 6.11.1（qtpaths 查询）、CMake 4.3.0、AppleClang 21.0.0.21000101、Unix Makefiles。
+- 聚合目录 `out/qt/aggregate-20261031` 配置成功，姓名与分数检查构建并运行通过；未观察 GUI。学习者实现与帮助详情见本日日志。

@@ -27,3 +27,22 @@ QVariant ResultModel::data(const QModelIndex &index, int role) const
     }
     return index.column() == 0 ? QVariant::fromValue(results_.at(index.row()).name) : QVariant::fromValue(results_.at(index.row()).score);
 }
+
+void ResultModel::setScore(int row, int score)
+{
+    if(row < 0 || row >= results_.size()) {
+        return;
+    }
+    results_[row].score = score;
+    emit dataChanged(index(row, 1), index(row, 1));
+}
+
+void ResultModel::setName(int row, const QString &name)
+{
+    // TODO: Ignore invalid rows. Update the name and notify only its cell.
+    if(row < 0 || row >= results_.size()) {
+        return;
+    }
+    results_[row].name = name;
+    emit dataChanged(index(row, 0), index(row, 0));
+}

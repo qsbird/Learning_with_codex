@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "topic_id": "qt",
+  "as_of": "2026-10-31",
+  "log_sha256": "2b97457859f14bdc58388516d0dde6ba81b49ba1676511972038e9789d40bf91",
+  "lessons": [
+    {
+      "id": "qt.P4.2",
+      "status": "verified",
+      "legacy_completion": true,
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-09-17 — P4.2: 只读二维 ResultModel",
+          "kind": "practice",
+          "assistance": "unknown"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-09-17 — P4.2: 只读二维 ResultModel",
+          "kind": "verification",
+          "assistance": "unknown"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-09-17 — P4.2: 只读二维 ResultModel",
+          "kind": "explanation",
+          "assistance": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "qt.P4.3",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-05 — P4.3: 静默修改分数后的通知预测",
+          "kind": "explanation",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-05 — P4.3: setScore 通知检查通过",
+          "kind": "practice",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-05 — P4.3: setScore 通知检查通过",
+          "kind": "verification",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-17 — P4.3: 通知范围与有效列的误解澄清",
+          "kind": "correction",
+          "assistance": "solution"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-17 — P4.3: index 行列顺序纠正",
+          "kind": "correction",
+          "assistance": "solution"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-18 — P4.3: 单格坐标回答正确，转入姓名通知实践",
+          "kind": "explanation",
+          "assistance": "hint"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-31 — P4.3: 通知范围与先写后通知解释通过",
+          "kind": "explanation",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-31 — P4.3: 姓名更新实现与两项行为检查通过",
+          "kind": "practice",
+          "assistance": "hint"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-31 — P4.3: 姓名更新实现与两项行为检查通过",
+          "kind": "verification",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-31 — P4.3: 模型通知课次完成",
+          "kind": "explanation",
+          "assistance": "none"
+        }
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "qt.model-contract",
+      "level": "explained",
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-09-17 — P4.2: 只读二维 ResultModel",
+          "kind": "explanation",
+          "assistance": "unknown"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-05 — P4.2: 只读模型契约复习",
+          "kind": "explanation",
+          "assistance": "none"
+        }
+      ],
+      "last_reviewed": "2026-10-05",
+      "next_review": "2026-10-12",
+      "review_prompt": "视图显示分数时调用的是哪个函数？对根 index 调用 rowCount 应返回几？"
+    },
+    {
+      "id": "qt.model-change-notification",
+      "level": "assisted",
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-31 — P4.3: 姓名更新实现与两项行为检查通过",
+          "kind": "practice",
+          "assistance": "hint"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-31 — P4.3: 通知范围与先写后通知解释通过",
+          "kind": "explanation",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-10-31 — P4.3: 模型通知课次完成",
+          "kind": "explanation",
+          "assistance": "none"
+        }
+      ],
+      "last_reviewed": "2026-10-31",
+      "next_review": "2026-11-01",
+      "review_prompt": "修改已有单元格后，视图如何得知变化？给出一个姓名单格和一个多行同列变化的通知范围，并说明先写后通知的原因。"
+    }
+  ],
+  "notes": [
+    "增量索引当前 P4；此前阶段完成情况保留在路线和日志中。",
+    "2026-09-17 的实现用过提示，该次记录保持原样。2026-10-05 的无提示回忆把模型契约当前能力记为 explained，尚未有独立代码变体。",
+    "2026-10-17 已核对日志失配及历史工程入口名称：见 qt.log.filename-correction.2026-10-17。今天仅复验，不新增学习者能力证据，P4.3 等待原通知范围解释。",
+    "2026-10-17 原通知范围解释未通过，已纠正“通常只有一列有意义”的误解；等待三行分数变体理解检查，不据教练答案关闭 P4.3。",
+    "2026-10-17 三行分数通知范围回答出现 index 行列顺序颠倒，已示范正确顺序；等待单格姓名变体，不升级能力。",
+    "2026-10-18 单格姓名坐标正确，提示后理解检查；转入 setName 代码变体。仅脚手架构建完成，等待学习者目标实现，不提升独立能力或关闭 P4.3。",
+    "2026-10-20 学习者明确要求使用新 learning-coach 重开 P4.3；已交付 learning/materials/qt.P4.3.md，等待阅读确认。保留历史完成、原提示与答案暴露，未新增学习者能力证据；见 qt.P4.3.restart-reading.2026-10-20。",
+    "2026-10-31 阅读后讨论的通知范围和先写后通知解释均正确；转入原 setName 实践。历史帮助保留，尚无本次姓名实现证据，P4.3 保持 in_progress。见 qt.P4.3.range-timing-discussion.2026-10-31。",
+    "2026-10-31 学习者 setName 实现和姓名、分数检查均通过；保留历史帮助，姓名变体标记 hint。待最后解释现有值变化与新增行的区别，当前 practice/reflect，尚未关闭课次。",
+    "2026-10-31 qt.P4.3 已完成：独立 setScore 历史实践、提示后姓名变体、两项行为验证及本日范围/时序/结构变化解释齐全。P4 阶段出口达标；通知能力保守为 assisted，11-01 复习，模型契约原到期项保留。Git 暂存排除历史入口名称的已有非追加修改，工作区与暂存摘要各自对应实际日志。"
+  ]
+}

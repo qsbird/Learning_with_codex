@@ -160,7 +160,7 @@
 | P1 | 已完成 | 2026-08-09 | `p1-widget-shell`：`.ui`+AUTOUIC、`.qrc`+AUTORCC、`Q_OBJECT`+AUTOMOC；菜单/工具栏/状态栏与资源图标可验证；能说明三套 AUTO* 输入与缺 AUTOMOC 的链接失败 | P3 完成后 |
 | P2 | 已完成 | 2026-08-13 | P2.1 四角色+context；P2.2 对象树 vs 智能指针，`deleteLater` 销毁 label 后连接失效可验证 | P4 完成后 |
 | P3 | 已完成 | 2026-08-15 | P3.1 嵌套布局缩放正确；P3.2 计时启停与 Action 状态同步，能说明状态不能只初始化一次 | P5 完成后 |
-| P4 | 进行中 | 2026-08-15 | P4.1：`p4-string-list` setModel + insertRow/setData。P4.2：`p4-readonly-table` 只读二维模型，能说明 rowCount/data/index/parent；待补模型通知或事件分发 |  |
+| P4 | 已完成 | 2026-08-15 | P4.1 字符串模型；P4.2 只读二维模型契约；2026-10-31 完成 qt.P4.3，setScore/setName 两项通知检查通过，能解释范围、先写后通知和已有值更新与新增行的区别（姓名变体保留历史帮助） | 通知 2026-11-01；模型契约 2026-10-12 到期项保留 |
 | P5 | 未开始 |  |  |  |
 | P6 | 未开始 |  |  |  |
 | P7 | 未开始 |  |  |  |
