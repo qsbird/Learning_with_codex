@@ -2,7 +2,7 @@
   "schema_version": 1,
   "topic_id": "cpp-linux-systems",
   "as_of": "2026-11-01",
-  "log_sha256": "04421f10be25f016d4b1fc76af0dcf43be8777cac6ad448cf24ff134a588e830",
+  "log_sha256": "227838b66524aa2c9e1a26d58e13b9782b738f71ebbe444581b2f51579d94b65",
   "lessons": [
     {
       "id": "cpp-linux-systems.M0.1",
@@ -53,9 +53,52 @@
       ]
     },
     {
+      "id": "cpp-linux-systems.M0.2",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.2: 两类删除复制探针检查通过",
+          "kind": "practice",
+          "assistance": "solution"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.2: 两类删除复制探针检查通过",
+          "kind": "verification",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.2: 两类复制禁用及参数传递迁移完成",
+          "kind": "transfer",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.2: 两类复制禁用及参数传递迁移完成",
+          "kind": "explanation",
+          "assistance": "none"
+        }
+      ]
+    },
+    {
       "id": "cpp-linux-systems.M0",
       "status": "prepared",
-      "evidence": []
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — 复制诊断：两个拥有者重复关闭同一资源",
+          "kind": "explanation",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — 两条删除复制声明的区别回答正确",
+          "kind": "explanation",
+          "assistance": "none"
+        }
+      ]
     }
   ],
   "concepts": [
@@ -91,6 +134,27 @@
       "last_reviewed": "2026-11-01",
       "next_review": "2026-11-02",
       "review_prompt": "解释裸文件句柄与拥有者的区别、获取/释放接口配对，以及普通结束/提前返回/被外层捕获的异常和嵌套作用域下的资源释放；不看旧实现做一个小变体。"
+    },
+    {
+      "id": "cpp.copy-constraints",
+      "level": "assisted",
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.2: 两类删除复制探针检查通过",
+          "kind": "practice",
+          "assistance": "solution"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.2: 两类复制禁用及参数传递迁移完成",
+          "kind": "transfer",
+          "assistance": "none"
+        }
+      ],
+      "last_reviewed": "2026-11-01",
+      "next_review": "2026-11-02",
+      "review_prompt": "不看旧材料，区分已有对象来源下的创建、赋值、按引用/按值传参，指出被禁用的入口；再说明独占资源为何不能只复制句柄。"
     }
   ],
   "notes": [
@@ -106,6 +170,7 @@
     "2026-11-01 嵌套 return 的析构顺序由学习者在无教练介入时主动修正并答对；目前仅有作用域控制流解释，文件资源责任对照问题待答。",
     "2026-11-01 作用域/指针区别已通过阅读后讨论（含一次澄清），当前进入 M0.1 两个函数体的实践；接口、复制防护和行为检查由教练提供。目标仍 TODO，尚无独立实现证据。",
     "2026-11-01 学习者已写构造保存句柄，析构 handle_.close() 导致编译失败；已解释命名空间函数与成员方法区别，保留原代码等本人修正，尚无运行时验证。见 cpp-linux-systems.M0.1.compile-api-debug.2026-11-01。",
-    "2026-11-01 M0.1 已验证完成：本人提示后实现，普通/ASan 四项用例通过，无追加提示的两个嵌套文件拥有者迁移解释正确。能力保持 assisted，11-02 复习；整个 M0 及复制/移动、独立变体仍未完成。见 cpp-linux-systems.M0.1.completed.2026-11-01。"
+    "2026-11-01 M0.1 已验证完成：本人提示后实现，普通/ASan 四项用例通过，无追加提示的两个嵌套文件拥有者迁移解释正确。能力保持 assisted，11-02 复习；整个 M0 及复制/移动、独立变体仍未完成。见 cpp-linux-systems.M0.1.completed.2026-11-01。",
+    "2026-11-01 M0.2已完成：有完整示例帮助的本人探针验证通过，引用/按值传参迁移独立判断正确，复制约束能力保守为assisted；11-02与RAII混合复习，M0阶段未完成。"
   ]
 }

@@ -110,6 +110,46 @@
       "checked_at": "2026-10-31",
       "check_scope": "核对异常退栈析构再次向外抛出异常导致 terminate，以及未捕获异常时退栈不保证执行的边界。",
       "limitations": "不是冻结的 C++20 标准正文；仅采用已有基础规则。已在 macOS 运行 ScopeTrace 演示，未在 Linux 运行，不将教练示例计为学习者证据。"
+    },
+    {
+      "id": "cpp-copy-constructor",
+      "url": "https://eel.is/c++draft/class.copy.ctor",
+      "publisher": "C++ working draft maintainers",
+      "version": "滚动工作草案；本课仅使用 C++20 已有规则",
+      "section": "Copy constructor signature and memberwise copy",
+      "checked_at": "2026-11-01",
+      "check_scope": "核对两类复制操作及=delete；本机以-fsyntax-only验证现有FileOwner的拷贝构造和赋值分别被拒绝。",
+      "limitations": "未运行资源复制程序，未给新变体目标实现；不将编译器拒绝教练示例记为学习者实践。"
+    },
+    {
+      "id": "cpp-copy-assignment",
+      "url": "https://eel.is/c++draft/class.copy.assign",
+      "publisher": "C++ working draft maintainers",
+      "version": "滚动工作草案；本课仅使用 C++20 已有规则",
+      "section": "Copy assignment signature and memberwise assignment",
+      "checked_at": "2026-11-01",
+      "check_scope": "核对两类复制操作及=delete；本机以-fsyntax-only验证现有FileOwner的拷贝构造和赋值分别被拒绝。",
+      "limitations": "未运行资源复制程序，未给新变体目标实现；不将编译器拒绝教练示例记为学习者实践。"
+    },
+    {
+      "id": "cpp-deleted-functions",
+      "url": "https://eel.is/c++draft/dcl.fct.def.delete",
+      "publisher": "C++ working draft maintainers",
+      "version": "滚动工作草案；本课仅使用 C++20 已有规则",
+      "section": "Deleted function calls are ill-formed",
+      "checked_at": "2026-11-01",
+      "check_scope": "核对两类复制操作及=delete；本机以-fsyntax-only验证现有FileOwner的拷贝构造和赋值分别被拒绝。",
+      "limitations": "未运行资源复制程序，未给新变体目标实现；不将编译器拒绝教练示例记为学习者实践。"
+    },
+    {
+      "id": "cpp-constructor-conversion",
+      "url": "https://eel.is/c++draft/class.conv.ctor",
+      "publisher": "C++ working draft maintainers",
+      "version": "滚动工作草案；本课采用 C++20 已有 explicit 规则",
+      "section": "Conversion by constructor; explicit constructors and initialization",
+      "checked_at": "2026-11-01",
+      "check_scope": "回答学习者两类初始化是否等价的追问时核对原文示例，区分当前同类型拷贝与一般转换。",
+      "limitations": "Number只作语法示例，不扩大为已验证全部初始化规则；移动和拷贝消除留后续。"
     }
   ]
 }

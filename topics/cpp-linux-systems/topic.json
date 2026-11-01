@@ -43,13 +43,39 @@
       ]
     },
     {
+      "id": "cpp-linux-systems.M0.2",
+      "title": "拷贝构造与拷贝赋值的禁止入口",
+      "stage": "M0",
+      "prerequisites": [
+        "cpp-linux-systems.M0.1"
+      ],
+      "sources": [
+        "cpp-copy-constructor",
+        "cpp-copy-assignment",
+        "cpp-deleted-functions",
+        "cpp-constructor-conversion"
+      ],
+      "roadmap": {
+        "file": "learning/roadmap.md",
+        "section": "M0.2 — 拷贝构造与拷贝赋值的禁止入口"
+      },
+      "exercise": "exercises/m0-raii-file",
+      "verify": [
+        {
+          "cwd": ".",
+          "command": "python3 exercises/m0-raii-file/copy_checks/check_copy.py"
+        }
+      ]
+    },
+    {
       "id": "cpp-linux-systems.M0",
       "title": "无 AI 基线与工具链",
       "stage": "M0",
       "prerequisites": [
         "cmake.P4.4",
         "qt.P4.3",
-        "cpp-linux-systems.M0.1"
+        "cpp-linux-systems.M0.1",
+        "cpp-linux-systems.M0.2"
       ],
       "sources": [
         "cpp-core-guidelines",

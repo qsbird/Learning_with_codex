@@ -9,7 +9,7 @@
   "hint_level": 0,
   "solution_shown": false,
   "blocker": null,
-  "resume_action": "M0.1 已完成，证据、帮助与无追加提示迁移已持久化到 cpp-linux-systems.M0.1.completed.2026-11-01，11-02 短复习。整个 M0 尚未完成，不直接跳入 M1 或原综合独立基线；下一步先诊断复制/移动已有知识，必要时准备 M0.2 再做不同条件的无 AI 变体。Qt 通知11-01到期复习仍待做、模型契约11-07保持。默认 macOS，平台相关差异课前提醒切换 Linux；Colima 未实际验证。空闲会话的提示字段清零不抹去日志/state 中的历史帮助。",
+  "resume_action": "M0.2已完成，探针、验证和无追加提示的引用/按值传参迁移已持久化到cpp-linux-systems.M0.2.completed.2026-11-01，历史完整示例帮助保留。今天M0.1/M0.2与Qt通知复习均已收口；下一学习会话先按日期做11-02 RAII/复制约束混合短复习，再诊断移动语义，必要时准备M0.3，不直接跳综合独立M0或M1。Qt模型契约11-07、通知11-08保持。默认Mac，相关差异前提醒Linux；Colima未验证。",
   "updated_at": "2026-11-01",
   "plan_checked_on": "2026-11-01"
 }
