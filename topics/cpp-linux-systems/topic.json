@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "id": "cpp-linux-systems",
+  "title": "C++ Linux Systems",
+  "goal": "用独立实现与可重复测量建立 C++/Linux 系统能力",
+  "status": "active",
+  "coverage_note": "增量索引当前课次；全部历史与阶段出口见 roadmap/log。",
+  "lessons": [
+    {
+      "id": "cpp-linux-systems.M0.1",
+      "title": "RAII 与作用域资源释放",
+      "stage": "M0",
+      "prerequisites": [
+        "cmake.P4.4",
+        "qt.P4.3"
+      ],
+      "sources": [
+        "cpp-core-guidelines",
+        "cpp-object-scope",
+        "cpp-unwinding",
+        "cpp-destructors",
+        "cpp-filebuf",
+        "cpp-termination"
+      ],
+      "roadmap": {
+        "file": "learning/roadmap.md",
+        "section": "M0.1 — RAII 与作用域资源释放"
+      },
+      "exercise": "exercises/m0-raii-file",
+      "verify": [
+        {
+          "cwd": ".",
+          "command": "cmake -S exercises/m0-raii-file -B ../../out/cpp-linux-systems/m0/macos -G Ninja -DCMAKE_BUILD_TYPE=Debug"
+        },
+        {
+          "cwd": ".",
+          "command": "cmake --build ../../out/cpp-linux-systems/m0/macos --target m0_scope_check"
+        },
+        {
+          "cwd": ".",
+          "command": "ctest --test-dir ../../out/cpp-linux-systems/m0/macos -R '^m0.scope[.]' --output-on-failure"
+        }
+      ]
+    },
+    {
+      "id": "cpp-linux-systems.M0",
+      "title": "无 AI 基线与工具链",
+      "stage": "M0",
+      "prerequisites": [
+        "cmake.P4.4",
+        "qt.P4.3",
+        "cpp-linux-systems.M0.1"
+      ],
+      "sources": [
+        "cpp-core-guidelines",
+        "cpp-cstdio",
+        "clang-asan",
+        "clang-ubsan"
+      ],
+      "roadmap": {
+        "file": "learning/roadmap.md",
+        "section": "M0 — 无 AI 基线与可重复工具链"
+      },
+      "exercise": "exercises/m0-raii-file",
+      "verify": [
+        {
+          "cwd": ".",
+          "command": "cmake -S exercises/m0-raii-file -B ../../out/cpp-linux-systems/m0/macos -G Ninja -DCMAKE_BUILD_TYPE=Debug"
+        },
+        {
+          "cwd": ".",
+          "command": "cmake --build ../../out/cpp-linux-systems/m0/macos"
+        },
+        {
+          "cwd": ".",
+          "command": "ctest --test-dir ../../out/cpp-linux-systems/m0/macos --output-on-failure"
+        }
+      ]
+    }
+  ]
+}

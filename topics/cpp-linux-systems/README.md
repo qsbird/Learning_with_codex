@@ -11,6 +11,12 @@ The cross-topic calendar and career checkpoints live in [the shared annual plan]
 3. Keep focused exercises under `exercises/<lesson>/` and generated output under `out/cpp-linux-systems/<lesson>/`.
 4. Append verified practice and explanations to [learning/log.md](learning/log.md).
 
+## Development environment
+
+Use native macOS for lessons whose required behavior, APIs, tools, and checks are equivalent on macOS and Linux. Each exercise identifies its platform before the learner starts. When platform differences affect the lesson, the coach explains the difference and prepares the selected local Colima Linux environment before assigning that work. Unknown equivalence must be checked rather than assumed.
+
+M0 begins with native macOS RAII practice. Linux environment setup is scheduled when the first platform-dependent exercise needs it. Keep macOS and Linux build trees separate, for example `out/cpp-linux-systems/m0/macos/` and `out/cpp-linux-systems/m0/linux/`. Platform-specific success is recorded only for the environment actually tested.
+
 ## Scope
 
 - Modern C++: RAII, value and move semantics, smart pointers, exception safety, STL, templates, concepts, library boundaries, and ABI basics.

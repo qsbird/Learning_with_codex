@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "topic_id": "cpp-linux-systems",
+  "lesson_id": null,
+  "status": "idle",
+  "mode": "plan",
+  "phase": "prepare",
+  "pending_question": null,
+  "hint_level": 0,
+  "solution_shown": false,
+  "blocker": null,
+  "resume_action": "M0.1 已完成，证据、帮助与无追加提示迁移已持久化到 cpp-linux-systems.M0.1.completed.2026-11-01，11-02 短复习。整个 M0 尚未完成，不直接跳入 M1 或原综合独立基线；下一步先诊断复制/移动已有知识，必要时准备 M0.2 再做不同条件的无 AI 变体。Qt 通知11-01到期复习仍待做、模型契约11-07保持。默认 macOS，平台相关差异课前提醒切换 Linux；Colima 未实际验证。空闲会话的提示字段清零不抹去日志/state 中的历史帮助。",
+  "updated_at": "2026-11-01",
+  "plan_checked_on": "2026-11-01"
+}

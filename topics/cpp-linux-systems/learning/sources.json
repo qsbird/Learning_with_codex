@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "cpp-core-guidelines",
+      "url": "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines",
+      "publisher": "C++ Core Guidelines editors",
+      "version": "在线版；页面标注 Jun 14, 2026；本课目标 C++20",
+      "section": "R.1 RAII; C.20 Rule of Zero; C.21 special members",
+      "checked_at": "2026-10-31",
+      "check_scope": "M0 备课重查 R.1 的资源配对及构造/析构、C.21 特殊成员函数相关入口；未将完整目标实现交付学习者。",
+      "limitations": "工程指导不是 ISO 标准正文；明确基线诊断可先检查已有知识，未学过的要求先教学。教练准备不构成独立能力。"
+    },
+    {
+      "id": "linux-epoll",
+      "url": "https://man7.org/linux/man-pages/man7/epoll.7.html",
+      "publisher": "Linux man-pages project",
+      "version": "在线 man-pages；实际内核版本待 Linux 环境验证",
+      "section": "DESCRIPTION; Level-triggered and edge-triggered",
+      "checked_at": "2026-09-26",
+      "check_scope": "核对原始页面及章节入口；不代表在本机运行了所有示例。",
+      "limitations": "供 M4 备课；本次只核对资料，不声称在 macOS 验证 Linux 行为。"
+    },
+    {
+      "id": "boost-asio",
+      "url": "https://www.boost.org/doc/libs/latest/doc/html/boost_asio/overview.html",
+      "publisher": "Boost.Asio maintainers",
+      "version": "latest；首次练习时记录实际 Boost 版本",
+      "section": "Core concepts and asynchronous model overview",
+      "checked_at": "2026-09-26",
+      "check_scope": "核对原始页面及章节入口；不代表在本机运行了所有示例。",
+      "limitations": "M4 备课需进一步选定示例与版本；本次未运行 Asio 示例。"
+    },
+    {
+      "id": "cpp-cstdio",
+      "url": "https://eel.is/c++draft/c.files",
+      "publisher": "C++ working draft maintainers",
+      "version": "滚动工作草案；本课只用 C++20 已有 cstdio 文件接口",
+      "section": "cstdio.syn: FILE, tmpfile, fclose, fputs, rewind, fgetc",
+      "checked_at": "2026-10-31",
+      "check_scope": "核对标准库接口入口与 C stdio 关系；辅助层用 tmpfile 创建真实临时文件并统计释放。",
+      "limitations": "在线草案含晚于 C++20 的内容；不使用这些新增特性，未在 Linux 运行本课。"
+    },
+    {
+      "id": "clang-asan",
+      "url": "https://clang.llvm.org/docs/AddressSanitizer.html",
+      "publisher": "LLVM/Clang project",
+      "version": "在线文档；实际 Apple Clang 21.0.0 (clang-2100.1.1.101)",
+      "section": "Usage: compile/link flags and runtime",
+      "checked_at": "2026-10-31",
+      "check_scope": "核对 -fsanitize=address 需用于编译和链接；本机已在独立目录编译并运行文件辅助层 smoke。",
+      "limitations": "运行的安全 smoke 只证明此程序可在 ASan 配置下构建运行，未故障注入验证检错，不证明学习者目标安全或文件资源释放正确。"
+    },
+    {
+      "id": "clang-ubsan",
+      "url": "https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html",
+      "publisher": "LLVM/Clang project",
+      "version": "在线文档；实际 Apple Clang 21.0.0 (clang-2100.1.1.101)",
+      "section": "Usage: fsanitize=undefined and fno-sanitize-recover",
+      "checked_at": "2026-10-31",
+      "check_scope": "核对 UBSan 编译/链接及遇错退出选项；本机已在独立目录编译并运行文件辅助层 smoke。",
+      "limitations": "未注入 UB 验证检错；本次仅检查辅助层构建运行，非学习者代码证据；Linux 工具支持仍待实际验证。"
+    },
+    {
+      "id": "cpp-object-scope",
+      "url": "https://eel.is/c++draft/stmt.dcl",
+      "publisher": "C++ working draft maintainers",
+      "version": "在线滚动工作草案；本课目标 C++20 已有语言规则",
+      "section": "stmt.dcl: automatic block variables and reverse destruction",
+      "checked_at": "2026-10-31",
+      "check_scope": "核对离开块和函数返回时局部自动对象的销毁规则。",
+      "limitations": "不是冻结的 C++20 标准正文；仅采用已有基础规则。已在 macOS 运行 ScopeTrace 演示，未在 Linux 运行，不将教练示例计为学习者证据。"
+    },
+    {
+      "id": "cpp-unwinding",
+      "url": "https://eel.is/c++draft/except.ctor",
+      "publisher": "C++ working draft maintainers",
+      "version": "在线滚动工作草案；本课目标 C++20 已有语言规则",
+      "section": "except.ctor: stack unwinding; completed construction",
+      "checked_at": "2026-10-31",
+      "check_scope": "核对向处理器传递异常时的逆序析构，以及构造未完成时已构造成员的清理。",
+      "limitations": "不是冻结的 C++20 标准正文；仅采用已有基础规则。已在 macOS 运行 ScopeTrace 演示，未在 Linux 运行，不将教练示例计为学习者证据。"
+    },
+    {
+      "id": "cpp-destructors",
+      "url": "https://eel.is/c++draft/class.dtor",
+      "publisher": "C++ working draft maintainers",
+      "version": "在线滚动工作草案；本课目标 C++20 已有语言规则",
+      "section": "class.dtor: destructor declaration and implicit invocation",
+      "checked_at": "2026-10-31",
+      "check_scope": "核对析构函数语法、局部对象离开代码块时的调用时机。",
+      "limitations": "不是冻结的 C++20 标准正文；仅采用已有基础规则。已在 macOS 运行 ScopeTrace 演示，未在 Linux 运行，不将教练示例计为学习者证据。"
+    },
+    {
+      "id": "cpp-filebuf",
+      "url": "https://eel.is/c++draft/filebuf.cons",
+      "publisher": "C++ working draft maintainers",
+      "version": "在线滚动工作草案；本课目标 C++20 已有语言规则",
+      "section": "filebuf.cons: basic_filebuf destructor",
+      "checked_at": "2026-10-31",
+      "check_scope": "核对标准文件缓冲对象析构调用 close；作为现成文件流的 RAII 示例，不展示目标 FileOwner 实现。",
+      "limitations": "不是冻结的 C++20 标准正文；仅采用已有基础规则。已在 macOS 运行 ScopeTrace 演示，未在 Linux 运行，不将教练示例计为学习者证据。"
+    },
+    {
+      "id": "cpp-termination",
+      "url": "https://eel.is/c++draft/except.terminate",
+      "publisher": "C++ working draft maintainers",
+      "version": "在线滚动工作草案；本课目标 C++20 已有语言规则",
+      "section": "except.terminate: destructor throws during stack unwinding",
+      "checked_at": "2026-10-31",
+      "check_scope": "核对异常退栈析构再次向外抛出异常导致 terminate，以及未捕获异常时退栈不保证执行的边界。",
+      "limitations": "不是冻结的 C++20 标准正文；仅采用已有基础规则。已在 macOS 运行 ScopeTrace 演示，未在 Linux 运行，不将教练示例计为学习者证据。"
+    }
+  ]
+}

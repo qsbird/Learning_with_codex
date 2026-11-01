@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "topic_id": "cpp-linux-systems",
+  "as_of": "2026-11-01",
+  "log_sha256": "04421f10be25f016d4b1fc76af0dcf43be8777cac6ad448cf24ff134a588e830",
+  "lessons": [
+    {
+      "id": "cpp-linux-systems.M0.1",
+      "status": "verified",
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.1: 提前返回的析构顺序预测",
+          "kind": "explanation",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.1: 裸指针变量与文件流生命周期的区分",
+          "kind": "correction",
+          "assistance": "hint"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.1: 指针对照确认，进入作用域释放实践",
+          "kind": "explanation",
+          "assistance": "hint"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.1: 移除错误 delete 后四项检查通过",
+          "kind": "practice",
+          "assistance": "hint"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.1: 移除错误 delete 后四项检查通过",
+          "kind": "verification",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.1: RAII 作用域释放小课完成",
+          "kind": "transfer",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.1: RAII 作用域释放小课完成",
+          "kind": "explanation",
+          "assistance": "none"
+        }
+      ]
+    },
+    {
+      "id": "cpp-linux-systems.M0",
+      "status": "prepared",
+      "evidence": []
+    }
+  ],
+  "concepts": [
+    {
+      "id": "cpp.raii-scope",
+      "level": "assisted",
+      "evidence": [
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.1: 提前返回的析构顺序预测",
+          "kind": "explanation",
+          "assistance": "none"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.1: 指针对照确认，进入作用域释放实践",
+          "kind": "explanation",
+          "assistance": "hint"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.1: 移除错误 delete 后四项检查通过",
+          "kind": "practice",
+          "assistance": "hint"
+        },
+        {
+          "file": "learning/log.md",
+          "section": "2026-11-01 — M0.1: RAII 作用域释放小课完成",
+          "kind": "transfer",
+          "assistance": "none"
+        }
+      ],
+      "last_reviewed": "2026-11-01",
+      "next_review": "2026-11-02",
+      "review_prompt": "解释裸文件句柄与拥有者的区别、获取/释放接口配对，以及普通结束/提前返回/被外层捕获的异常和嵌套作用域下的资源释放；不看旧实现做一个小变体。"
+    }
+  ],
+  "notes": [
+    "仅索引下一节 M0；现代 C++ 到旗舰项目的远期结构仍以 roadmap 为准。",
+    "M0 尚无学习者证据；不能把路线准备或本次工具建设标记为完成。",
+    "C0 的显式延期由教练根据年度规则评估后调整依赖，工具不自动豁免。",
+    "2026-10-03 按学习者停止 LLM 的决定撤下 llm.M3.4 依赖；M0 仍等待 CMake/Qt 收口，计划调整依据见 cpp-linux-systems.plan.2026-10-03。",
+    "2026-10-17 按停课决定撤下 cmake.P5.2 依赖，M0 仅等待 qt.P4.3 收口，依据见 cpp-linux-systems.plan.2026-10-17；不改变任何课程完成状态。",
+    "2026-10-31 Qt P4 前置证据已齐；按 cpp-linux-systems.platform-plan.2026-10-31，M0 通用 RAII 先在 macOS 编码，平台差异课前提醒并切换已选 Colima/Linux。Linux 环境实际验证按首次相关课安排，后续 Linux 退出证据保留；这是学习者的环境偏好与计划调整，不是能力证据。",
+    "2026-10-31 M0 Mac 本机脚手架与辅助层普通/ASan/UBSan smoke 已准备并验证，目标类和学习者测试为空；见 cpp-linux-systems.M0.scaffold.2026-10-31。当前待 RAII 低压力诊断回答，未开始独立计时或记录能力。",
+    "2026-10-31 学习者对 RAII 诊断回复“不熟悉”，已转 M0.1 阅读教学；原独立基线未开始，未记失败。材料与日志示例已交付，阅读位置/时间未知，能力仍 unknown。见 cpp-linux-systems.M0.1.reading-start.2026-10-31。",
+    "2026-11-01 学习者已确认读完 M0.1 材料，进入概念讨论，阅读耗时未知；阅读不计理解证据。今日继续当前课次，Qt 通知到期复习仍待做。",
+    "2026-11-01 嵌套 return 的析构顺序由学习者在无教练介入时主动修正并答对；目前仅有作用域控制流解释，文件资源责任对照问题待答。",
+    "2026-11-01 作用域/指针区别已通过阅读后讨论（含一次澄清），当前进入 M0.1 两个函数体的实践；接口、复制防护和行为检查由教练提供。目标仍 TODO，尚无独立实现证据。",
+    "2026-11-01 学习者已写构造保存句柄，析构 handle_.close() 导致编译失败；已解释命名空间函数与成员方法区别，保留原代码等本人修正，尚无运行时验证。见 cpp-linux-systems.M0.1.compile-api-debug.2026-11-01。",
+    "2026-11-01 M0.1 已验证完成：本人提示后实现，普通/ASan 四项用例通过，无追加提示的两个嵌套文件拥有者迁移解释正确。能力保持 assisted，11-02 复习；整个 M0 及复制/移动、独立变体仍未完成。见 cpp-linux-systems.M0.1.completed.2026-11-01。"
+  ]
+}
