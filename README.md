@@ -28,5 +28,6 @@ Start with the topic index in [topics/README.md](topics/README.md). For a new su
 - [Qt](topics/qt/README.md): Qt 6 Widgets, model/view, asynchronous work, and reusable components.
 - [LLM](topics/llm/README.md): a bounded from-scratch language-model learning project.
 - [C++ Linux Systems](topics/cpp-linux-systems/README.md): modern C++, Linux diagnostics, concurrency, networking, and performance.
+- [Git Source](topics/git-source/README.md): an optional, on-demand command-and-source course with no scheduled reviews or cross-topic plan integration.
 
 The cross-topic 2026–2027 sequence is tracked in [the C++ career learning plan](learning/cpp-career-plan-2026-2027.md).

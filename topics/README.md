@@ -8,5 +8,6 @@ Each directory is self-contained: its learning records describe what has been le
 | [Qt](qt/README.md) | Qt 6 Widgets, CMake, and optional project mapping | `topics/qt/` |
 | [LLM](llm/README.md) | Minimal from-scratch LLM pipeline (short-term project) | `topics/llm/` |
 | [C++ Linux Systems](cpp-linux-systems/README.md) | Modern C++, Linux, concurrency, networking, and performance | `topics/cpp-linux-systems/` |
+| [Git Source](git-source/README.md) | On-demand Git commands, storage, C implementation, and experiments; independent of scheduled plans | `topics/git-source/` |
 
 To add another topic, follow the root [workspace guide](../README.md) and start its records from `../learning/_templates/`.
